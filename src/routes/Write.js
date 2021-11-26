@@ -34,12 +34,12 @@ function Write () {
       </div>
       <form onSubmit={writeSubmit} className="writeBox">
         <div className="writeInputBox">
-          <input onInput={inputCount} maxLength="199"></input>
+          <textarea onInput={inputCount} maxLength="199"></textarea>
           <p>{count}/200</p>
         </div>
         <div>
           <button>작성취소</button>
-          <button>저장하기</button>
+          <button type="submit">저장하기</button>
         </div>
       </form>
     </div>

@@ -17,6 +17,7 @@
   line-height: 174.2%;
   text-align: center;
   color: #f88270;
+  margin: 0 auto;
 }
 
 .Write > .questions > div > p {
@@ -27,6 +28,7 @@
   line-height: 50px;
   text-align: center;
   color: #084861;
+  margin: 0 auto;
 }
 
 .Write > .writeBox {
@@ -47,7 +49,7 @@
   align-items: center;
 }
 
-.Write > .writeBox > .writeInputBox > input {
+.Write > .writeBox > .writeInputBox > textarea {
   width: 80%;
   height: 60%;
 }
