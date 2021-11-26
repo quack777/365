@@ -1,0 +1,53 @@
+.Write {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Write > .questions {
+  text-align: center;
+}
+
+.Write > .questions > p {
+  font-family: Spoqa Han Sans Neo;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 174.2%;
+  text-align: center;
+  color: #f88270;
+}
+
+.Write > .questions > div > p {
+  font-family: Spoqa Han Sans Neo;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 50px;
+  text-align: center;
+  color: #084861;
+}
+
+.Write > .writeBox {
+  width: 1200px;
+  height: 463px;
+  background-color: rgb(246, 243, 241);
+  border-radius: 16px;
+}
+
+.Write > .writeBox > .writeInputBox {
+  width: 1200px;
+  height: 463px;
+  background-color: rgb(246, 243, 241);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Write > .writeBox > .writeInputBox > input {
+  width: 80%;
+  height: 60%;
+}

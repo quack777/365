@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import VectorLeft from '../images/Vector left.png'
 import VectorRight from '../images/Vector right.png'
 import Vector from '../images/Vector 1.png'
@@ -8,6 +9,8 @@ function Home () {
   const NewDate = new Date();
   const month = NewDate.getMonth() + 1;
   const date = NewDate.getDate();
+
+  const [answer8, setAnswer8] = useState();
   return(
     <div className="Home">
       <div className="questions">
