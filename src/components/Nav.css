@@ -1,0 +1,38 @@
+.Nav {
+  height: 143px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 86px;
+  padding-right: 119px;
+}
+
+.Nav > #logo {
+  font-family: Volte;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 35px;
+  line-height: 42px;
+
+  text-align: center;
+  letter-spacing: 0.1em;
+  color: #084861;
+}
+
+.Nav > #nav_btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 23px;
+  width: 458px;
+
+  font-family: Spoqa Han Sans Neo;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 23px;
+  /* identical to box height */
+
+  text-align: center;
+  color: #084861;
+}

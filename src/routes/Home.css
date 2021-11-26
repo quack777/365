@@ -1,0 +1,103 @@
+.Home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Home > .questions {
+}
+
+.Home > .questions > p {
+  font-family: Spoqa Han Sans Neo;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 174.2%;
+
+  text-align: center;
+  color: #f88270;
+
+  margin: 0 auto;
+}
+
+.Home > .questions > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Home > .questions > div > p {
+  font-family: Spoqa Han Sans Neo;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 55px;
+  line-height: 69px;
+  text-align: center;
+  color: #084861;
+
+  margin: 0 20px;
+}
+
+.Home > .answers {
+  height: 400px;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Home > .answers > .answer {
+  height: 310px;
+  width: 725px;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 10px 20px 50px #f5f4f5;
+  border-radius: 16px;
+}
+/* 오늘 나의 생각 남기기 버튼 */
+/* 오늘 나의 생각 남기기 버튼 */
+.Home #goWriteBtn {
+  /* Auto Layout */
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 25px;
+
+  /* color/main/green */
+
+  background: #7eb496;
+  /* shadow */
+  border-radius: 100px;
+  border-style: none;
+}
+
+.Home #goWriteBtn > p {
+  font-family: Spoqa Han Sans Neo;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 174.2%;
+  /* identical to box height, or 44px */
+
+  /* color/grey/01 */
+
+  color: #f9f8f9;
+
+  /* Inside Auto Layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: 0px 30px;
+}
+
+.Home #goWriteBtn > img {
+  /* Inside Auto Layout */
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  margin: 0px 30px;
+}
