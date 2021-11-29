@@ -1,14 +1,13 @@
 import React from "react";
-import loginImage from "../images/loginImage.png";
+import signupImage from "../images/signupImage.png";
 import rigthArrow from '../images/Vector 1.png';
-import { Link } from 'react-router-dom';
-import './Login.css';
+import './SingUp.css'
 
-function Login () {
+function Sign() {
   return(
-    <div className="Login">
+    <div className="SignUp">
       <section>
-        <img src={loginImage}></img>
+        <img src={signupImage}></img>
         <p>어떤 설명 사이트에 대한 설명</p>
         <p>어떤 설명 사이트에 대한 설명</p>
         <div>
@@ -19,16 +18,15 @@ function Login () {
       <section>
         <p>로그인</p>
         <p>카카오톡 계정으로 1초 안에 로그인하세요.</p>
-        <div className="button">
-          <p>카카오톡으로 계속</p>
-        </div>
-        <div className="pp">
-          <p>신규사용자이신가요?</p>
-          <Link to="/signup"><p>카카오 회원가입하기</p></Link>
-        </div>
+        <form>
+          <input type="text" required></input>
+          <input type="password" required></input>
+          <p>카카오계정저장</p>
+          <p>로그인</p>
+        </form>
       </section>
     </div>
   )
 }
 
-export default Login;
+export default Sign;
