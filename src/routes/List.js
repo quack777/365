@@ -13,14 +13,23 @@ function List() {
   const date = NewDate.getDate();
 
   const [ deletes , setDeletes ] = useState(false);
+  const [ calender, setCalender ] = useState(false);
 
   const deleteModalContainer = useRef()
   function showDelete(e) {
-    setDeletes(true)
+    setDeletes(true);
   }
 
   function xDelete() {
-    setDeletes(false)
+    setDeletes(false);
+  }
+
+  function seeCalender() {
+    setCalender(true);
+  }
+
+  function closeCanlender() {
+    setCalender(false);
   }
   return(
     <div className="List">
@@ -29,13 +38,13 @@ function List() {
           <p>{month}월 {date}일</p>
           <p>나의 삶의 목적은 무엇인가요?</p>
         </div>
-        <img src={monthBTN}></img>
+        <img src={monthBTN} onClick={seeCalender}></img>
       </div>
       <div className="list">
         <hr></hr>
         <div className="watch">
           <p>2021년의 나:</p>
-          <p>나는 이렇고 저렇고 이다 그래서 이렇다 하기는 좀 그렇다 그니까 그래서 나는 오늘 밥을 먹었다 밥 먹으니까 배 아픈데 눈이 더 아프다</p>
+          <p>나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 200자 일 때 모습입니다</p>
         </div>
         <div className="buttons">
           <p>전체공개</p>
@@ -60,6 +69,12 @@ function List() {
         </section>
       </div>)
       : null}
+      {calender ? 
+      (<div className="calendar">
+        <img src={xxxxx} onClick={closeCanlender}></img>
+        <div></div>
+      </div>)
+      : null }
     </div>
   )
 }

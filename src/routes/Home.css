@@ -79,6 +79,8 @@
   /* shadow */
   border-radius: 100px;
   border-style: none;
+
+  margin-bottom: 40px;
 }
 
 .Home #goWriteBtn > p {

@@ -10,7 +10,7 @@ function Nav() {
         <Link to="/write"><p>소개</p></Link>
         <Link to="/list"><p>내 일기장</p></Link>
         <Link to="/trash"><p>휴지통</p></Link>
-        <p>로그아웃</p>
+        <Link to="/login"><p>로그인/회원가입</p></Link>
       </div>
     </div>
   )
