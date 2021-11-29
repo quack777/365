@@ -1,0 +1,154 @@
+.Trash {
+  width: 70%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.Trash > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Trash > div > p:nth-child(1) {
+  font-family: Noto Sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 55px;
+  line-height: 75px;
+
+  /* color/sub/blue */
+
+  color: #084861;
+}
+
+.Trash > div > p:nth-child(2) {
+  font-family: Spoqa Han Sans Neo;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 174.2%;
+  /* identical to box height, or 44px */
+
+  letter-spacing: 0.07em;
+
+  /* color/grey/01 */
+
+  color: #f9f8f9;
+
+  background: #7eb496;
+  border-radius: 16px;
+
+  padding: 15px 40px;
+}
+
+.Trash > p {
+  font-family: Spoqa Han Sans Neo;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 174.2%;
+  /* identical to box height, or 35px */
+
+  /* color/grey/text02 */
+
+  color: #98999c;
+
+  margin-top: 0;
+  margin-bottom: 5rem;
+
+  position: relative;
+  bottom: 20px;
+}
+
+.Trash section > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.Trash section > div hr {
+  opacity: 0.1;
+  /* color/sub/blue */
+
+  border: 2px solid #084861;
+  width: 100%;
+  height: auto;
+}
+
+.Trash > section .question {
+  margin-bottom: 50px;
+}
+
+.Trash > section .question > p:nth-child(1) {
+  font-family: Spoqa Han Sans Neo;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 174.2%;
+  /* identical to box height, or 35px */
+
+  /* color/sub/red */
+
+  color: #f88270;
+}
+
+.Trash section .question > p:nth-child(2) {
+  font-family: Spoqa Han Sans Neo;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 38px;
+  display: flex;
+  align-items: flex-end;
+
+  /* color/sub/blue */
+
+  color: #084861;
+
+  margin: 0 auto;
+}
+
+.Trash section .answers {
+  align-self: flex-end;
+}
+
+.Trash section .answers > p:nth-child(1) {
+  font-family: Spoqa Han Sans Neo;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 38px;
+  display: flex;
+  align-items: flex-end;
+
+  /* color/sub/blue */
+
+  color: #084861;
+}
+
+.Trash section .answers > p:nth-child(2) {
+  font-family: Spoqa Han Sans Neo;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 25px;
+  line-height: 209.7%;
+  /* or 52px */
+
+  letter-spacing: -0.05em;
+
+  /* color/sub/blue */
+
+  color: #084861;
+}
+
+.Trash section .btns {
+  width: 170px;
+  height: auto;
+  align-self: flex-end;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
