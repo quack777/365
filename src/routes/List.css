@@ -1,0 +1,139 @@
+.List > .questions {
+  width: 70%;
+  height: auto;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 80px;
+}
+
+.List > .questions > img {
+  object-fit: contain;
+  background: #7eb496;
+  border-radius: 16px;
+  padding: 25px;
+  align-self: flex-end;
+}
+
+.List > .questions p:nth-child(1) {
+  font-family: Spoqa Han Sans Neo;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 174.2%;
+  /* identical to box height, or 35px */
+
+  /* color/sub/red */
+
+  color: #f88270;
+}
+
+.List > .questions p:nth-child(2) {
+  font-family: Noto Sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 55px;
+  line-height: 75px;
+
+  /* color/sub/blue */
+
+  color: #084861;
+
+  margin: 0 auto;
+}
+
+.List > .list {
+  width: 70%;
+  height: auto;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.List > .list > .watch {
+  display: flex;
+  justify-content: space-between;
+}
+
+.List > .list > .watch > p:nth-child(1) {
+  font-family: Spoqa Han Sans Neo;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 38px;
+  display: flex;
+  align-items: flex-end;
+
+  /* color/sub/blue */
+
+  color: #084861;
+}
+.List > .list > .watch > p:nth-child(2) {
+  font-family: Spoqa Han Sans Neo;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 25px;
+  line-height: 209.7%;
+  /* or 52px */
+
+  letter-spacing: -0.05em;
+
+  /* color/sub/blue */
+
+  color: #084861;
+}
+
+.List > .list hr {
+  opacity: 0.1;
+  /* color/sub/blue */
+  border: 1px solid #084861;
+  width: 100%;
+  height: auto;
+}
+
+.List > .list > .buttons {
+  display: flex;
+  align-self: flex-end;
+  align-content: center;
+}
+
+.List > .list > .buttons > p {
+  font-family: Spoqa Han Sans Neo;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 174.2%;
+  /* identical to box height, or 35px */
+
+  text-align: right;
+
+  /* color/main/green */
+
+  color: #7eb496;
+
+  margin-right: 43px;
+}
+
+/* .List > .list > .buttons > img {
+  object-fit: contain;
+  background: #f1faf0;
+  border-radius: 16px;
+  padding: 0px 15px;
+  margin-right: 43px;
+} */
+
+.List > .list > .buttons > img {
+  object-fit: contain;
+  margin: 0 10px;
+}
+
+.List > .list > .buttons > div {
+  align-self: center;
+}
+
+.List > .list > .buttons > div > img {
+  background: #f1faf0;
+  border-radius: 16px;
+  padding: 5px 15px;
+}
