@@ -4,12 +4,18 @@ import Home from './routes/Home';
 import Write from './routes/Write';
 import List from './routes/List';
 import Trash from './routes/Trash';
+import { HashRouter, Route } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <Nav />
-      <List />
+      <HashRouter>
+        <Nav />
+        <Route path="/" exact={true} component={Home}/>
+        <Route path="/write" exact={true} component={Write}/>
+        <Route path="/list" exact={true} component={List}/>
+        <Route path="/trash" exact={true} component={Trash}/>
+      </HashRouter>
     </div>
   );
 }

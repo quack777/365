@@ -60,6 +60,10 @@
 }
 /* 오늘 나의 생각 남기기 버튼 */
 /* 오늘 나의 생각 남기기 버튼 */
+.Home a {
+  text-decoration: none;
+}
+
 .Home #goWriteBtn {
   /* Auto Layout */
 

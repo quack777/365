@@ -7,7 +7,11 @@
   padding-right: 119px;
 }
 
-.Nav > #logo {
+.Nav a {
+  text-decoration: none;
+}
+
+.Nav #logo {
   font-family: Volte;
   font-style: italic;
   font-weight: bold;
@@ -35,4 +39,29 @@
 
   text-align: center;
   color: #084861;
+}
+
+.Nav > #nav_btn > a {
+  font-family: Spoqa Han Sans Neo;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 23px;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  /* color/sub/blue */
+
+  color: #084861;
+}
+
+.Nav > #nav_btn > a:active {
+  background-color: red;
+}
+
+.Nav > #nav_btn > a:visited {
+  text-decoration: none;
 }

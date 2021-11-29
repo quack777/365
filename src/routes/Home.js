@@ -1,9 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
-import VectorLeft from '../images/Vector left.png'
-import VectorRight from '../images/Vector right.png'
-import Vector from '../images/Vector 1.png'
-import './Home.css'
+import VectorLeft from '../images/Vector left.png';
+import VectorRight from '../images/Vector right.png';
+import Vector from '../images/Vector 1.png';
+import './Home.css';
+import { Link } from 'react-router-dom';
 
 function Home () {
   const NewDate = new Date();
@@ -33,10 +34,12 @@ function Home () {
         </div>
         <img></img>
       </div>
-      <button id="goWriteBtn">
-        <p>오늘 나의 생각 남기기</p>
-        <img src={Vector} alt="vector"></img>
-      </button>
+      <Link to="/write">
+        <button id="goWriteBtn">
+          <p>오늘 나의 생각 남기기</p>
+          <img src={Vector} alt="vector"></img>
+        </button>
+      </Link>
     </div>
   )
 }
