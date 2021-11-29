@@ -1,3 +1,7 @@
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css);
+@import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Noto+Sans+KR:wght@300;400;700&display=swap");
+
 .List > .questions {
   width: 70%;
   height: auto;
@@ -136,4 +140,116 @@
   background: #f1faf0;
   border-radius: 16px;
   padding: 5px 15px;
+}
+
+.deleteModal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 724px;
+  height: 436px;
+  background: #ffffff;
+  /* shadow */
+
+  box-shadow: 0px 20px 100px rgba(156, 156, 156, 0.15);
+  border-radius: 16px;
+
+  z-index: 2;
+  margin: 0 auto;
+  position: relative;
+  bottom: 200px;
+}
+
+.deleteModal > img {
+  align-self: flex-end;
+  margin-right: 40px;
+  position: relative;
+  bottom: 50px;
+}
+
+.deleteModal > p {
+  text-align: center;
+}
+
+.deleteModal > p:nth-child(2) {
+  font-family: Spoqa Han Sans Neo;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 38px;
+  text-align: center;
+
+  /* color/sub/blue */
+
+  color: #084861;
+  margin: 0 auto;
+}
+
+.deleteModal > p:nth-child(3) {
+  font-family: Spoqa Han Sans Neo;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 209.7%;
+  /* or 42px */
+
+  text-align: center;
+
+  /* color/grey/text02 */
+
+  color: #98999c;
+}
+
+.deleteModal > section {
+  display: flex;
+  align-self: center;
+  margin-top: 20px;
+}
+
+.deleteModal > section > p {
+  text-align: center;
+  padding: 10px 0;
+  margin: 5px 10px;
+}
+
+.deleteModal > section > p:nth-child(1) {
+  width: 198px;
+  height: auto;
+  font-family: Spoqa Han Sans Neo;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 174.2%;
+  /* identical to box height, or 44px */
+
+  letter-spacing: 0.07em;
+
+  /* color/grey/text02 */
+
+  color: #98999c;
+
+  border: 2px solid #bbbbbb;
+  box-sizing: border-box;
+  border-radius: 16px;
+}
+
+.deleteModal > section > p:nth-child(2) {
+  width: 198px;
+  height: auto;
+
+  font-family: Spoqa Han Sans Neo;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 174.2%;
+  /* identical to box height, or 44px */
+
+  letter-spacing: 0.07em;
+
+  /* color/grey/01 */
+
+  color: #f9f8f9;
+
+  background: #7eb496;
+  border-radius: 16px;
 }

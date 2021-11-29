@@ -1,14 +1,27 @@
 import React from "react";
-import './List.css'
-import modify_normal from '../images/modify_normal.png'
-import Line from '../images/Line45.png'
-import monthBTN from '../images/monthBTN.png'
+import { useState, useRef } from "react";
+import './List.css';
+import modify_normal from '../images/modify_normal.png';
+import Line from '../images/Line45.png';
+import monthBTN from '../images/monthBTN.png';
+import delete_normal from '../images/delete_normal.png';
+import xxxxx from '../images/xxxxx.png';
 
 function List() {
   const NewDate = new Date();
   const month = NewDate.getMonth() + 1;
   const date = NewDate.getDate();
 
+  const [ deletes , setDeletes ] = useState(false);
+
+  const deleteModalContainer = useRef()
+  function showDelete(e) {
+    setDeletes(true)
+  }
+
+  function xDelete() {
+    setDeletes(false)
+  }
   return(
     <div className="List">
       <div className="questions">
@@ -30,12 +43,23 @@ function List() {
           <div>
             <img src={modify_normal}></img>
           </div>
-          <img src={Line}></img>
-          <div>
-            <img src={modify_normal}></img>
+          <img src={Line}></img> 
+          <div onClick={showDelete}>
+            <img src={delete_normal}></img>
           </div>
         </div>
       </div>
+      {deletes ?
+      (<div className="deleteModal" ref={deleteModalContainer}>
+        <img onClick={xDelete} src={xxxxx}></img>
+        <p>답변을 정말 삭제하시겠어요?</p>
+        <p>삭제된 답변은 휴지통에 일주일 동안 보관됩니다</p>
+        <section>
+          <p>삭제하기</p>
+          <p onClick={xDelete}>취소하기</p>
+        </section>
+      </div>)
+      : null}
     </div>
   )
 }
