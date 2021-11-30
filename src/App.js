@@ -5,7 +5,7 @@ import Write from './routes/Write';
 import List from './routes/List';
 import Trash from './routes/Trash';
 import Login from './routes/Login';
-
+import Signup from './routes/Sign';
 import { HashRouter, Route } from "react-router-dom";
 
 function App() {

@@ -159,7 +159,7 @@
   text-decoration: none;
 }
 
-.pp a p {
+.pp p:nth-child(2) {
   font-family: Spoqa Han Sans Neo;
   font-style: normal;
   font-weight: normal;

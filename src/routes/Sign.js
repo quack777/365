@@ -1,11 +1,11 @@
 import React from "react";
 import signupImage from "../images/signupImage.png";
 import rigthArrow from '../images/Vector 1.png';
-import './SingUp.css'
+import './Signup.css';
 
-function Sign() {
+function Signup() {
   return(
-    <div className="SignUp">
+    <div className="Signup">
       <section>
         <img src={signupImage}></img>
         <p>어떤 설명 사이트에 대한 설명</p>
@@ -16,11 +16,11 @@ function Sign() {
         </div>
       </section>
       <section>
-        <p>로그인</p>
-        <p>카카오톡 계정으로 1초 안에 로그인하세요.</p>
+        <p>회원가입</p>
+        <p>회원이 되어 매일 나를 위한 질문을 받아보세요</p>
         <form>
-          <input type="text" required></input>
-          <input type="password" required></input>
+          <input id="id"type="text" required></input>
+          <input id="pwd"type="password" required></input>
           <p>카카오계정저장</p>
           <p>로그인</p>
         </form>
@@ -29,4 +29,4 @@ function Sign() {
   )
 }
 
-export default Sign;
+export default Signup;

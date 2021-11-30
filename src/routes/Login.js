@@ -24,7 +24,7 @@ function Login () {
         </div>
         <div className="pp">
           <p>신규사용자이신가요?</p>
-          <Link to="/signup"><p>카카오 회원가입하기</p></Link>
+          <p>카카오 회원가입하기</p>
         </div>
       </section>
     </div>

@@ -58,6 +58,7 @@
   box-shadow: 10px 20px 50px #f5f4f5;
   border-radius: 16px;
 }
+
 /* 오늘 나의 생각 남기기 버튼 */
 /* 오늘 나의 생각 남기기 버튼 */
 .Home a {
@@ -110,4 +111,72 @@
   order: 1;
   flex-grow: 0;
   margin: 0px 30px;
+}
+
+.Home .overflow {
+  overflow: hidden;
+  width: 90%;
+  margin-top: 100px;
+  margin-bottom: 70px;
+}
+
+.Home .Aanswers {
+  display: flex;
+  flex-wrap: nowrap;
+  transition: all 2s;
+}
+
+.Home .Aanswers .Aanswer {
+  flex: 0 0 auto;
+  height: 310px;
+  width: 725px;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 10px 20px 50px #f5f4f5;
+  margin-right: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.Home .Aanswers .Aanswer > p:nth-child(1) {
+  font-family: Spoqa Han Sans Neo;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 174.2%;
+  /* identical to box height, or 35px */
+
+  letter-spacing: -0.05em;
+
+  /* color/sub/blue */
+
+  color: #084861;
+
+  margin-left: 50px;
+}
+
+.Home .Aanswers .Aanswer > p:nth-child(2) {
+  font-family: Spoqa Han Sans Neo;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 174.2%;
+  /* or 35px */
+
+  letter-spacing: -0.05em;
+
+  /* color/sub/blue */
+
+  color: #084861;
+
+  margin: 0 50px;
+}
+
+.Home .btnBox {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  bottom: 160px;
 }
