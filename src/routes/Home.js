@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import VectorLeft from '../images/Vector left.png';
 import VectorRight from '../images/Vector right.png';
 import Vector from '../images/Vector 1.png';
+import arrow from '../images/arrow01_normal.png';
 import './Home.css';
 import { Link } from 'react-router-dom';
 
@@ -24,17 +25,15 @@ function Home () {
       answersBox.current.style.transform = `translateX(${num}%)`;
     }
   }
-
+  //데이터 세팅
+  const [showdata, setShowdata] = useState();
+  //데이터 세팅
   function rightMove() {
     if(num <= 30){  
       setNum(num+30);
       answersBox.current.style.transform = `translateX(${num}%)`;
     }
   }
-
-  useEffect(() => {
-    // answersBox.current.style.transform = `traslateX(${num}%)`;
-  }, [])
 
   return(
     <div className="Home">
@@ -46,16 +45,6 @@ function Home () {
           <img src={VectorRight} alt="vectorRight"></img>
         </div>
       </div>
-      {/* <div className="answers">
-        <div className="answer">
-          <p>보송보송한 아메리카 앵무새</p>
-          <p>답변 받아올 곳</p>
-        </div>
-        <div className="answer">
-          <p>보송보송한 아메리카 앵무새</p>
-          <p>axios get data</p>
-        </div>
-      </div> */}
       <div className="overflow">
         <div className="Aanswers" ref={answersBox}>
           {answer8.map((answer, index) => {
@@ -68,8 +57,8 @@ function Home () {
           })}
         </div>
         <div className="btnBox">
-          <button onClick={leftMove}>왼쪽이동</button>
-          <button onClick={rightMove}>오른쪽이동</button>
+          <img src={arrow} onClick={leftMove}></img>
+          <img src={arrow} onClick={rightMove}></img>
         </div>
       </div>
       <Link to="/write">

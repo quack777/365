@@ -35,7 +35,21 @@
   color: #084861;
 }
 
-.Login > section:nth-child(1) > p:nth-child(3) {
+.Login .overflow {
+  overflow: hidden;
+  width: 457px;
+  height: auto;
+}
+
+.Login .box {
+  display: flex;
+  flex-wrap: nowrap;
+  animation-name: aa;
+  animation-duration: 15s;
+  animation-iteration-count: infinite;
+}
+
+.Login .overflow p {
   font-family: Spoqa Han Sans Neo;
   font-style: normal;
   font-weight: normal;
@@ -48,6 +62,10 @@
   /* color/grey/text02 */
 
   color: #98999c;
+
+  flex: 0 0 auto;
+  width: 457px;
+  height: auto;
 }
 
 .Login > section:nth-child(1) > div > img {
@@ -55,6 +73,10 @@
   margin: 0px 10px;
   padding: 7px 9px;
   border-radius: 50%;
+}
+
+.Login > section:nth-child(1) > div > img:nth-child(1) {
+  transform: rotateY(180deg);
 }
 
 .Login > section:nth-child(2) {
@@ -126,6 +148,7 @@
   letter-spacing: 0.07em;
 
   color: #341a1f;
+  margin-left: 19px;
 }
 
 .pp {
@@ -172,4 +195,43 @@
   /* color/grey/text02 */
 
   color: #000000;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0%);
+  }
+  20% {
+    transform: translateX(0%);
+  }
+  40% {
+    transform: translateX(-100%);
+  }
+  60% {
+    transform: translateX(-200%);
+  }
+  80% {
+    transform: translateX(-300%);
+  }
+  100% {
+    transform: translateX(-300%);
+  }
+}
+
+@keyframes aa {
+  0% {
+    transform: translateX(0%);
+  }
+  25% {
+    transform: translateX(0%);
+  }
+  50% {
+    transform: translateX(-100%);
+  }
+  75% {
+    transform: translateX(-200%);
+  }
+  100% {
+    transform: translateX(-300%);
+  }
 }
