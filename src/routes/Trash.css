@@ -117,6 +117,7 @@
 
 .Trash section .answers {
   align-self: flex-end;
+  width: 1012px;
 }
 
 .Trash section .answers > p:nth-child(1) {

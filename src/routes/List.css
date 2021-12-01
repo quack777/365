@@ -87,9 +87,8 @@
   color: #084861;
 
   align-self: flex-start;
-  min-width: 812px;
-  width: 812px;
-  max-width: 812px;
+
+  width: 1012px;
 }
 
 .List > .list hr {
