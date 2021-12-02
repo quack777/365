@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useRef, useEffect } from 'react';
+import axios from 'axios';
 import VectorLeft from '../images/Vector left.png';
 import VectorRight from '../images/Vector right.png';
 import Vector from '../images/Vector 1.png';
@@ -34,6 +35,17 @@ function Home () {
       answersBox.current.style.transform = `translateX(${num}%)`;
     }
   }
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/answers")
+      .then(function (response) {
+        console.log(response.data);
+        setAnswer8(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, [])
 
   return(
     <div className="Home">
