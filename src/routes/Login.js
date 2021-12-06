@@ -5,6 +5,7 @@ import rigthArrow from '../images/Vector 1.png';
 import kakao from '../images/kakao.png';
 import { Link } from 'react-router-dom';
 import './Login.css';
+import axios from "axios";
 
 function Login () {
   const box = useRef();
@@ -35,6 +36,22 @@ function Login () {
   //   }, 2000);
   // }, [])
 
+
+  function kakaoLogin() {
+    axios(
+      {
+        url: '/login/getKakaoAuthUrl',
+        method: 'get',
+        baseURL: 'http://61.72.99.219:9130',
+        //withCredentials: true,
+      }
+    ).then(function (response) {
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
   return(
     <div className="Login">
       <section>
@@ -58,7 +75,7 @@ function Login () {
         <p>카카오톡 계정으로 1초 안에 로그인하세요.</p>
         <div className="button">
           <img src={kakao}></img>
-          <p>카카오톡으로 계속</p>
+          <p onClick={kakaoLogin}>카카오톡으로 계속</p>
         </div>
         <div className="pp">
           <p>신규사용자이신가요?</p>

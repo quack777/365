@@ -47,6 +47,23 @@ function Home () {
       });
   }, [])
 
+  useEffect(() => {
+    axios(
+      {
+        url: '/random',
+        method: 'get',
+        baseURL: 'http://61.72.99.219:9130',
+        //withCredentials: true,
+      }
+    ).then(function (response) {
+      console.log(response.data);
+      setRanname(response.data)
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }, [])
+
   return(
     <div className="Home">
       <div className="questions">
