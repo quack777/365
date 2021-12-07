@@ -64,6 +64,12 @@ function Home () {
     });
   }, [])
 
+
+  var now = new Date();
+  var start = new Date(now.getFullYear(), 0, 0);
+  var diff = now - start;
+  var oneDay = 1000 * 60 * 60 * 24;
+  var day = Math.floor(diff / oneDay) + 1;
   return(
     <div className="Home">
       <div className="questions">

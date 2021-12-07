@@ -2,15 +2,28 @@ import React from "react";
 import { useEffect, useRef, useState } from "react";
 import loginImage from "../images/loginImage.png";
 import rigthArrow from '../images/Vector 1.png';
-import kakao from '../images/kakao.png';
+import kaka from '../images/kakao.png';
 import { Link } from 'react-router-dom';
 import './Login.css';
 import axios from "axios";
 
 function Login () {
+  const {Kakao} = window;
+
   const box = useRef();
-  const[num, setNum] = useState(0)
+  const [num, setNum] = useState(0)
   const number_ref = useRef(0);
+  const [days, setDays] = useState();
+
+  useEffect(() => {
+    var now = new Date();
+    var start = new Date(now.getFullYear(), 0, 0);
+    var diff = now - start;
+    var oneDay = 1000 * 60 * 60 * 24;
+    var day = Math.floor(diff / oneDay) + 1;
+    setDays(day)
+    console.log(days)
+  },[])
 
   // function repeat() {
   //   if(num === 0 ) {
@@ -38,20 +51,11 @@ function Login () {
 
 
   function kakaoLogin() {
-    axios(
-      {
-        url: '/login/getKakaoAuthUrl',
-        method: 'get',
-        baseURL: 'http://61.72.99.219:9130',
-        //withCredentials: true,
-      }
-    ).then(function (response) {
-      console.log(response.data);
+    Kakao.Auth.authorize({
+      redirectUri: 'http://61.72.99.219:9130/login/oauth_kakao'
     })
-    .catch(function (error) {
-      console.log(error);
-    });
   }
+
   return(
     <div className="Login">
       <section>
@@ -74,7 +78,7 @@ function Login () {
         <p>로그인</p>
         <p>카카오톡 계정으로 1초 안에 로그인하세요.</p>
         <div className="button">
-          <img src={kakao}></img>
+          <img src={kaka}></img>
           <p onClick={kakaoLogin}>카카오톡으로 계속</p>
         </div>
         <div className="pp">

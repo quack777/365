@@ -1,7 +1,7 @@
 import React from "react";
 import signupImage from "../images/signupImage.png";
 import rigthArrow from '../images/Vector 1.png';
-import './Signup.css';
+import './Sign.css';
 
 function Signup() {
   return(
