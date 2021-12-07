@@ -13,9 +13,12 @@ function Write () {
   const date = NewDate.getDate();
   const year = NewDate.getFullYear();
 
+  const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [count, setCount] = useState(0);
   const [open, setOpen] = useState(false);
+  const [publica, setPublica] = useState("N");
+  const [questionN, setQuestionN] = useState();
 
   function writeSubmit(e) {
     e.preventDefault();
@@ -25,9 +28,22 @@ function Write () {
     console.log("submit");
     setCount(0);
     setAnswer("");
-    axios.post('http://localhost:5000/register', {
-      name : answer,
-      password : "12345"
+
+    const now = new Date();
+    const year = now.getFullYear();
+    const date = now.getDate(); 
+    axios.patch('http://61.72.99.219:9130/answers/pages/22/2', {
+      // answer_year : "2021",
+      // answer_date : "1207",
+      // answer : answer,
+      // public_answer : "Y",
+      // question_num : 342,
+      // member_num : 1,
+      // answer_delete : null
+      answer : "군고구마가 더 좋은것같기도,,",
+      public_answer : "Y",
+      answer_num : 22,
+      member_num : 2
     })
     .then(function (response) {
       console.log(response);
@@ -48,22 +64,47 @@ function Write () {
 
   function stateClose() {
     setOpen(true)
+    setPublica("N")
   }
 
   function stateOpen() {
     setOpen(false)
+    setPublica("Y")
   }
 
   function sendData() {
     console.log(answer)
   }
 
+  useEffect(() => {
+    const now = new Date();
+    const start = new Date(now.getFullYear(), 0, 0);
+    const diff = now - start;
+    const oneDay = 1000 * 60 * 60 * 24;
+    const day = Math.floor(diff / oneDay) + 1;
+    axios(
+      {
+        url: `/question/${day}`,
+        method: 'get',
+        baseURL: 'http://61.72.99.219:9130',
+        //withCredentials: true,
+      }
+      ).then(function (response) {
+        console.log(response.data);
+        setQuestion(response.data.question);
+        setQuestionN(response.data.question_num);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, [])
+
   return(
     <div className="Write">
       <div className="questions">
         <p>{month}월 {date}일, {year}</p>
         <div>
-          <p>나의 삶의 목적은 무엇인가요?</p>
+          <p>{question}</p>
         </div>
       </div>
       <form onSubmit={writeSubmit} className="writeBox">

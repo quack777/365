@@ -14,8 +14,9 @@ function Home () {
   const month = NewDate.getMonth() + 1;
   const date = NewDate.getDate();
 
-  const [answer8, setAnswer8] = useState(["대답1", "나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 이게 200자일 때 모습입니다~", "대답3", "대답4", "대답5", "대답6", "대답7", "대답8"]);
+  const [answer8, setAnswer8] = useState(["우짤", "나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 이게 200자일 때 모습입니다~", "대답3", "대답4", "대답5", "대답6", "대답7", "대답8"]);
   const [ranname, setRanname] = useState(["뽀로로", "라치카", "시미즈", "리안", "리헤이", "허니제이", "스우파", 8]);
+  const [question, setQuestion] = useState("질문");
   const [num, setNum] = useState(0);
 
   const answersBox = useRef() 
@@ -37,10 +38,21 @@ function Home () {
   }
 
   useEffect(() => {
-    axios.get("http://localhost:5000/answers")
-      .then(function (response) {
-        console.log(response.data);
-        setAnswer8(response.data);
+    var now = new Date();
+    var start = new Date(now.getFullYear(), 0, 0);
+    var diff = now - start;
+    var oneDay = 1000 * 60 * 60 * 24;
+    var day = Math.floor(diff / oneDay) + 1;
+    axios(
+      {
+        url: `/question/${day}`,
+        method: 'get',
+        baseURL: 'http://61.72.99.219:9130',
+        //withCredentials: true,
+      }
+      ).then(function (response) {
+        console.log(response.data.question);
+        setQuestion(response.data.question);
       })
       .catch(function (error) {
         console.log(error);
@@ -57,7 +69,7 @@ function Home () {
       }
     ).then(function (response) {
       console.log(response.data);
-      setRanname(response.data)
+      setRanname(response.data);
     })
     .catch(function (error) {
       console.log(error);
@@ -70,13 +82,14 @@ function Home () {
   var diff = now - start;
   var oneDay = 1000 * 60 * 60 * 24;
   var day = Math.floor(diff / oneDay) + 1;
+
   return(
     <div className="Home">
       <div className="questions">
         <p>{month}월 {date}일</p>
         <div>
           <img src={VectorLeft} alt="vectorLeft"></img>
-          <p>나의 삶의 목적은 무엇인가요?</p>
+          <p>{question}</p>
           <img src={VectorRight} alt="vectorRight"></img>
         </div>
       </div>

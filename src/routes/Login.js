@@ -52,7 +52,7 @@ function Login () {
 
   function kakaoLogin() {
     Kakao.Auth.authorize({
-      redirectUri: 'http://61.72.99.219:9130/login/oauth_kakao'
+      redirectUri: 'http://61.72.99.219:9130//login/getKakaoAuthUrl'
     })
   }
 

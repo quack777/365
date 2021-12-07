@@ -16,7 +16,7 @@
   object-fit: contain;
   background: #7eb496;
   border-radius: 16px;
-  padding: 25px;
+  padding: 20.94px 22.03px;
   align-self: flex-end;
 }
 
@@ -24,7 +24,7 @@
   font-family: Spoqa Han Sans Neo;
   font-style: normal;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 15px;
   line-height: 174.2%;
   /* identical to box height, or 35px */
 
@@ -37,8 +37,8 @@
   font-family: Noto Sans;
   font-style: normal;
   font-weight: 600;
-  font-size: 55px;
-  line-height: 75px;
+  font-size: 41.25px;
+  line-height: 56px;
 
   /* color/sub/blue */
 
@@ -64,8 +64,8 @@
   font-family: Spoqa Han Sans Neo;
   font-style: normal;
   font-weight: bold;
-  font-size: 30px;
-  line-height: 38px;
+  font-size: 22.5px;
+  line-height: 28px;
   align-self: flex-start;
 
   /* color/sub/blue */
@@ -76,7 +76,7 @@
   font-family: Spoqa Han Sans Neo;
   font-style: normal;
   font-weight: normal;
-  font-size: 25px;
+  font-size: 18.75px;
   line-height: 209.7%;
   /* or 52px */
 
@@ -88,7 +88,7 @@
 
   align-self: flex-start;
 
-  width: 1012px;
+  max-width: 759px;
 }
 
 .List > .list hr {
@@ -109,7 +109,7 @@
   font-family: Spoqa Han Sans Neo;
   font-style: normal;
   font-weight: 500;
-  font-size: 20px;
+  font-size: 15px;
   line-height: 174.2%;
   /* identical to box height, or 35px */
 
@@ -159,8 +159,12 @@
 
   z-index: 4;
   margin: 0 auto;
-  position: relative;
-  bottom: 550px;
+  /* position: relative;
+  bottom: 550px; */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .deleteModal > img {
@@ -259,11 +263,13 @@
 
 .calendar {
   z-index: 3;
-  position: relative;
-  bottom: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   margin: 0 auto;
-  width: 1096px;
-  height: 648px;
+  width: 822px;
+  height: 486px;
 
   background: #ffffff;
   /* shadow */

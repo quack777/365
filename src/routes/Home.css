@@ -16,7 +16,7 @@
   font-family: Spoqa Han Sans Neo;
   font-style: normal;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 15px;
   line-height: 174.2%;
 
   text-align: center;
@@ -27,7 +27,6 @@
 
 .Home > .questions > div {
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 
@@ -35,12 +34,17 @@
   font-family: Spoqa Han Sans Neo;
   font-style: normal;
   font-weight: bold;
-  font-size: 55px;
-  line-height: 69px;
+  font-size: 41.25px;
+  line-height: 57px;
   text-align: center;
   color: #084861;
-
   margin: 0 20px;
+  max-width: 849px;
+  align-self: center;
+}
+
+.Home > .questions > div > img {
+  align-self: flex-start;
 }
 
 .Home > .answers {
@@ -89,7 +93,7 @@
   font-family: Spoqa Han Sans Neo;
   font-style: normal;
   font-weight: 500;
-  font-size: 25px;
+  font-size: 18.75px;
   line-height: 174.2%;
   /* identical to box height, or 44px */
 
@@ -102,7 +106,7 @@
   flex: none;
   order: 0;
   flex-grow: 0;
-  margin: 0px 30px;
+  margin: 0px 20px;
 }
 
 .Home #goWriteBtn > img {
@@ -111,7 +115,7 @@
   flex: none;
   order: 1;
   flex-grow: 0;
-  margin: 0px 30px;
+  margin: 0px 20px;
 }
 
 .Home .overflow {
