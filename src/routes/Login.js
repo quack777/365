@@ -3,17 +3,20 @@ import { useEffect, useRef, useState } from "react";
 import loginImage from "../images/loginImage.png";
 import rigthArrow from '../images/Vector 1.png';
 import kaka from '../images/kakao.png';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import './Login.css';
 import axios from "axios";
+import { KAKAO_AUTH_URL } from "./OAuth";
+
+const {Kakao} = window;
 
 function Login () {
-  const {Kakao} = window;
 
   const box = useRef();
   const [num, setNum] = useState(0)
   const number_ref = useRef(0);
   const [days, setDays] = useState();
+  const [code, setCode] = useState();
 
   useEffect(() => {
     var now = new Date();
@@ -50,12 +53,43 @@ function Login () {
   // }, [])
 
 
+  const history = useHistory()
+
   function kakaoLogin() {
-    Kakao.Auth.authorize({
-      redirectUri: 'http://61.72.99.219:9130//login/getKakaoAuthUrl'
-    })
+    axios(
+      {
+      url: "/login/getKakaoAuthUrl",
+      method: "get",
+      baseURL: "http://61.72.99.219:9130"
+      }
+      ).then(function (response) {
+        console.log(response.data);
+        setCode(response.data);
+        window.location.href = `${response.data}`;
+        move()
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
+  function move(response) {
+    let codea = new URL(window.location.href).searchParams.get("code");
+    console.log(codea);
+    // axios(
+    //   {
+    //     url: `${response}`,
+    //     method: 'get',
+    //     baseURL: 'http://61.72.99.219:9130',
+    //     //withCredentials: true,
+    //   }
+    //   ).then(function (response) {
+    //     console.log(response);
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
+  }
   return(
     <div className="Login">
       <section>
@@ -86,6 +120,7 @@ function Login () {
           <p>카카오 회원가입하기</p>
         </div>
       </section>
+      <a href={KAKAO_AUTH_URL}>가나요</a>
     </div>
   )
 }

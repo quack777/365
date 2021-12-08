@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 33px;
+  margin-top: 65px;
 }
 
 .Home > .questions {
@@ -28,6 +28,7 @@
 .Home > .questions > div {
   display: flex;
   justify-content: center;
+  margin: 10px auto;
 }
 
 .Home > .questions > div > p {
@@ -38,13 +39,14 @@
   line-height: 57px;
   text-align: center;
   color: #084861;
-  margin: 0 20px;
+  margin: 0 25px;
   max-width: 849px;
   align-self: center;
 }
 
 .Home > .questions > div > img {
   align-self: flex-start;
+  transform: translateY(10px);
 }
 
 .Home > .answers {
@@ -87,6 +89,9 @@
   border-style: none;
 
   margin-bottom: 40px;
+
+  position: relative;
+  bottom: 60px;
 }
 
 .Home #goWriteBtn > p {
@@ -121,7 +126,7 @@
 .Home .overflow {
   overflow: hidden;
   width: 90%;
-  margin-top: 100px;
+  margin-top: 80px;
   margin-bottom: 0px;
 }
 
@@ -133,8 +138,8 @@
 
 .Home .Aanswers .Aanswer {
   flex: 0 0 auto;
-  height: 310px;
-  width: 725px;
+  height: 232.5px;
+  width: 543.75px;
   border-radius: 16px;
   background: #ffffff;
   box-shadow: 10px 20px 50px #f5f4f5;
@@ -147,7 +152,7 @@
   font-family: Spoqa Han Sans Neo;
   font-style: normal;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 15px;
   line-height: 174.2%;
   /* identical to box height, or 35px */
 
@@ -164,7 +169,7 @@
   font-family: Spoqa Han Sans Neo;
   font-style: normal;
   font-weight: normal;
-  font-size: 20px;
+  font-size: 15px;
   line-height: 174.2%;
   /* or 35px */
 

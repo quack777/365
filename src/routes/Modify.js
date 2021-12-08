@@ -1,13 +1,10 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import toggle_unselected from "../images/toggle_unselected.png";
 import toggle_selected from "../images/toggle_selected.png";
-import axios, { Axios } from 'axios';
 
-import './Write.css';
-
-function Write () {
+function Modify() {
   const NewDate = new Date();
   const month = NewDate.getMonth() + 1;
   const date = NewDate.getDate();
@@ -114,7 +111,7 @@ function Write () {
             {open ? <img src={toggle_selected} onClick={stateOpen}></img> : <img src={toggle_unselected} onClick={stateClose}></img>}
           </div>
           <div className="twoBtn">
-            <Link to="/365"><p id="first">작성취소</p></Link>
+            <Link to="/list"><p id="first">작성취소</p></Link>
             <button type="submit" id="second" onClick={sendData}>저장하기</button>
             {/* <Link to="/list"><p id="second" onClick={sendData}>저장하기</p></Link> */}
           </div>
@@ -123,4 +120,5 @@ function Write () {
     </div>
   )
 }
-export default Write;
+
+export default Modify;

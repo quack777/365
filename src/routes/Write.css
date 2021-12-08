@@ -56,7 +56,7 @@
   font-family: Spoqa Han Sans Neo;
   font-style: normal;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 15px;
   line-height: 174.2%;
   /* identical to box height, or 35px */
 
@@ -68,18 +68,18 @@
 }
 
 .Write > .writeBox textarea {
-  width: 1100px;
-  height: 337px;
+  width: 826px;
+  height: 252px;
   background: #f9f8f9;
   border-radius: 16px;
   border-style: none;
   resize: none;
-  padding: 63px 50px;
+  padding: 47px 37px;
 
   font-family: Spoqa Han Sans Neo;
   font-style: normal;
   font-weight: normal;
-  font-size: 30px;
+  font-size: 22.5px;
   line-height: 174.2%;
   /* or 52px */
 
@@ -110,14 +110,14 @@
 
 .Write > .writeBox > div > .twoBtn p {
   margin: 0 20px;
-  padding: 15px 50px;
+  padding: 11.25px 37.5px;
 }
 
 .Write > .writeBox > div > .twoBtn #first {
   font-family: Spoqa Han Sans Neo;
   font-style: normal;
   font-weight: 500;
-  font-size: 25px;
+  font-size: 18.75px;
   line-height: 174.2%;
   /* identical to box height, or 44px */
 
@@ -139,7 +139,7 @@
   font-family: Spoqa Han Sans Neo;
   font-style: normal;
   font-weight: 500;
-  font-size: 25px;
+  font-size: 18.75px;
   line-height: 174.2%;
   /* identical to box height, or 44px */
 
