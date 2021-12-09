@@ -3,6 +3,7 @@ import './Introduce.css';
 import Introduce_top from '../images/07.png';
 import ballon from '../images/Group 5582.png';
 import { Link } from 'react-router-dom';
+import made_people from "../images/made_people.png";
 function Introduce() {
   return(
     <div className="Introduce">
@@ -32,9 +33,9 @@ function Introduce() {
           <p>365 시작하기</p>
         </Link>
       </section>
-      <section>
+      <section className="bottom">
         <p>만든 사람들</p>
-        <div className="이미지 들어갈곳"></div>
+        <img src={made_people}></img>
       </section>
     </div>
   )

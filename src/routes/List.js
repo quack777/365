@@ -10,6 +10,9 @@ import xxxxx from '../images/xxxxx.png';
 import Calendar from 'react-calendar';
 import axios from "axios";
 import Modify from "./Modify";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { ko } from 'date-fns/esm/locale';
 
 function List() {
   const NewDate = new Date();
@@ -136,9 +139,12 @@ function List() {
       {calender ? 
       (<div className="calendar">
         <img src={xxxxx} onClick={closeCanlender}></img>
-        <Calendar
-        onChange={onChange}
-        value={value}
+        <DatePicker
+          selected={startDate}
+          onChange={(date) => setStartDate(date)}
+          locale={ko}
+          dateFormat="MM월 dd일"
+          inline
         />
       </div>)
       : null }
