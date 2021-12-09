@@ -66,7 +66,8 @@ function Login () {
         console.log(response.data);
         setCode(response.data);
         window.location.href = `${response.data}`;
-        move()
+      }).then(function () {
+        console.log("aa");
       })
       .catch(function (error) {
         console.log(error);
@@ -76,19 +77,19 @@ function Login () {
   function move(response) {
     let codea = new URL(window.location.href).searchParams.get("code");
     console.log(codea);
-    // axios(
-    //   {
-    //     url: `${response}`,
-    //     method: 'get',
-    //     baseURL: 'http://61.72.99.219:9130',
-    //     //withCredentials: true,
-    //   }
-    //   ).then(function (response) {
-    //     console.log(response);
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
+    axios(
+    {
+      url: `${response}`,
+      method: 'get',
+      baseURL: 'http://61.72.99.219:9130',
+      //withCredentials: true,
+    }
+    ).then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
   return(
     <div className="Login">

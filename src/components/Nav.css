@@ -5,6 +5,8 @@
   align-items: center;
   padding-left: 86px;
   padding-right: 119px;
+  box-sizing: border-box;
+  width: 100vw;
 }
 
 .Nav a {

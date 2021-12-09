@@ -1,8 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import toggle_unselected from "../images/toggle_unselected.png";
-import toggle_selected from "../images/toggle_selected.png";
+import toggle_unselected from "../images/main_private.png";
+import toggle_selected from "../images/main_public.png";
 import axios, { Axios } from 'axios';
 
 import './Write.css';
@@ -115,8 +115,8 @@ function Write () {
           </div>
           <div className="twoBtn">
             <Link to="/365"><p id="first">작성취소</p></Link>
-            <button type="submit" id="second" onClick={sendData}>저장하기</button>
-            {/* <Link to="/list"><p id="second" onClick={sendData}>저장하기</p></Link> */}
+            <Link to="/list"><p id="second" onClick={sendData}>저장하기</p></Link>
+            {/* <button type="submit" id="second" onClick={sendData}>저장하기</button> */}
           </div>
         </div>
       </form>

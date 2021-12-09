@@ -102,7 +102,7 @@
 .List > .list > .buttons {
   display: flex;
   align-self: flex-end;
-  align-content: center;
+  align-items: center;
 }
 
 .List > .list > .buttons > p {
@@ -139,10 +139,17 @@
   align-self: center;
 }
 
-.List > .list > .buttons > div > img {
-  background: #f1faf0;
+.List > .list > .buttons div > img {
   border-radius: 16px;
   padding: 5px 15px;
+}
+
+.List > .list > .buttons div > img:hover {
+  background: #f1faf0;
+}
+
+.List > .list > .buttons div > img:active {
+  background: #d8e8d6;
 }
 
 .deleteModal {

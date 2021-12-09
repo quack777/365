@@ -51,7 +51,7 @@ function Home () {
         //withCredentials: true,
       }
       ).then(function (response) {
-        console.log(response.data.question);
+        console.log(response.data);
         setQuestion(response.data.question);
       })
       .catch(function (error) {
@@ -68,7 +68,7 @@ function Home () {
         //withCredentials: true,
       }
     ).then(function (response) {
-      console.log(response.data);
+      console.log(response);
       setRanname(response.data);
     })
     .catch(function (error) {
@@ -76,6 +76,26 @@ function Home () {
     });
   }, [])
 
+  useEffect(() => {
+    var now = new Date();
+    var start = new Date(now.getFullYear(), 0, 0);
+    var diff = now - start;
+    var oneDay = 1000 * 60 * 60 * 24;
+    var day = Math.floor(diff / oneDay) + 1;
+    axios(
+      {
+        url: `/random/${day}`, // /random/{question_num}
+        method: 'get',
+        baseURL: 'http://61.72.99.219:9130',
+        //withCredentials: true,
+      }
+    ).then(function (response) {
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }, [])
 
   var now = new Date();
   var start = new Date(now.getFullYear(), 0, 0);

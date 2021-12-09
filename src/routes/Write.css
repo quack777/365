@@ -47,9 +47,9 @@
 
 .Write > .writeBox > p {
   align-self: flex-end;
-  margin-right: 78px;
+  margin-right: 60px;
   position: relative;
-  bottom: 100px;
+  bottom: 70px;
   margin-top: 0;
   margin-bottom: 0;
 
@@ -110,7 +110,7 @@
 
 .Write > .writeBox > div > .twoBtn p {
   margin: 0 20px;
-  padding: 11.25px 37.5px;
+  padding: 11px 37px;
 }
 
 .Write > .writeBox > div > .twoBtn #first {
@@ -135,6 +135,14 @@
   border-radius: 16px;
 }
 
+.Write > .writeBox > div > .twoBtn #first:hover {
+  background: #ededed;
+}
+
+.Write > .writeBox > div > .twoBtn #first:active {
+  background: #dbdbdb;
+}
+
 .Write > .writeBox > div > .twoBtn #second {
   font-family: Spoqa Han Sans Neo;
   font-style: normal;
@@ -151,4 +159,14 @@
 
   background: #7eb496;
   border-radius: 16px;
+
+  padding: 13px 39px;
+}
+
+.Write > .writeBox > div > .twoBtn #second:hover {
+  background: #9fd3b6;
+}
+
+.Write > .writeBox > div > .twoBtn #second:active {
+  background: #78aa8e;
 }

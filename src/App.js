@@ -9,6 +9,7 @@ import Signup from './routes/Sign';
 import Modify from './routes/Modify';
 import OAuth2RedirectHandler from './routes/OAuth2RedirectHandeler';
 import { HashRouter, Route, BrowserRouter } from "react-router-dom";
+import Introduce from './routes/Introduce';
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
         <Route path="/list" component={List}/>
         <Route path="/trash" component={Trash}/>
         <Route path="/login" component={Login}/>
-        <Route path="/modify" component={Modify}/>
+        <Route path="/introduce" component={Introduce} />
         <Route path="/365/login/oauth_kakao" component={OAuth2RedirectHandler}></Route>
       </BrowserRouter>
     </div>

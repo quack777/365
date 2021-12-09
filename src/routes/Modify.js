@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import toggle_unselected from "../images/toggle_unselected.png";
-import toggle_selected from "../images/toggle_selected.png";
+import toggle_unselected from "../images/main_private.png";
+import toggle_selected from "../images/main_public.png";
 
 function Modify() {
   const NewDate = new Date();
@@ -73,14 +73,27 @@ function Modify() {
   }
 
   useEffect(() => {
-    const now = new Date();
-    const start = new Date(now.getFullYear(), 0, 0);
-    const diff = now - start;
-    const oneDay = 1000 * 60 * 60 * 24;
-    const day = Math.floor(diff / oneDay) + 1;
     axios(
       {
-        url: `/question/${day}`,
+        url: `/question/{question_num}`, // /question/{question_num}
+        method: 'get',
+        baseURL: 'http://61.72.99.219:9130',
+        //withCredentials: true,
+      }
+      ).then(function (response) {
+        console.log(response.data);
+        setQuestion(response.data.question);
+        setQuestionN(response.data.question_num);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, [])
+  
+  useEffect(() => {
+    axios(
+      {
+        url: `/answers/pages/{answer_num}`, // /answers/pages/{answer_num}
         method: 'get',
         baseURL: 'http://61.72.99.219:9130',
         //withCredentials: true,
@@ -112,8 +125,8 @@ function Modify() {
           </div>
           <div className="twoBtn">
             <Link to="/list"><p id="first">작성취소</p></Link>
-            <button type="submit" id="second" onClick={sendData}>저장하기</button>
-            {/* <Link to="/list"><p id="second" onClick={sendData}>저장하기</p></Link> */}
+            <Link to="/list"><p id="second" onClick={sendData}>저장하기</p></Link>
+            {/* <button type="submit" id="second" onClick={sendData}>저장하기</button> */}
           </div>
         </div>
       </form>

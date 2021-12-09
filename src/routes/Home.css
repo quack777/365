@@ -94,6 +94,14 @@
   bottom: 60px;
 }
 
+.Home #goWriteBtn:hover {
+  background: #9fd3b6;
+}
+
+.Home #goWriteBtn:active {
+  background: #78aa8e;
+}
+
 .Home #goWriteBtn > p {
   font-family: Spoqa Han Sans Neo;
   font-style: normal;
@@ -188,7 +196,7 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
-  bottom: 200px;
+  bottom: 170px;
 }
 
 .Home .btnBox > img:nth-child(1) {

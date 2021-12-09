@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 import './List.css';
 import modify_normal from '../images/modify_normal.png';
 import Line from '../images/Line45.png';
@@ -9,6 +9,7 @@ import delete_normal from '../images/delete_normal.png';
 import xxxxx from '../images/xxxxx.png';
 import Calendar from 'react-calendar';
 import axios from "axios";
+import Modify from "./Modify";
 
 function List() {
   const NewDate = new Date();
@@ -19,6 +20,9 @@ function List() {
   const [ calender, setCalender ] = useState(false);
   const [ value, onChange ] = useState(new Date());
   const [ question, setQuestion] = useState("나의 삶의 목적은 무엇인가요?");
+  const [ open, setOpen ] = useState(false);
+  const [ answer, setAnswer ] = useState("나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 200자 일 때 모습입니다")
+  const [startDate, setStartDate] = useState(new Date());
 
   const deleteModalContainer = useRef()
   function showDelete(e) {
@@ -60,7 +64,7 @@ function List() {
     var day = Math.floor(diff / oneDay) + 1;
     axios(
       {
-        url: `/question/${day}`,
+        url: `/question/${day}`, // /question/{question_num}
         method: 'get',
         baseURL: 'http://61.72.99.219:9130',
         //withCredentials: true,
@@ -76,7 +80,7 @@ function List() {
 
   function goTrash() {
     axios(
-      { url : "/answers/trashes/{answer_num}/{member_num}",
+      { url : "/answers/trashes/{answer_num}/{member_num}", // /answers/trashes/{answer_num}/{member_num} 
         method : "patch",
         baseURL : "http://61.72.99.219:9130"
     }).then((response) => {
@@ -100,16 +104,18 @@ function List() {
         <hr></hr>
         <div className="watch">
           <p>2021년의 나:</p>
-          <p>나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 200자 일 때 모습입니다</p>
+          <p>{answer}</p>
         </div>
         <div className="buttons">
           <p>전체공개</p>
-          {/* <img src={modify_normal}></img> */}
           <Link to="/modify">
             <div>
               <img src={modify_normal}></img>
             </div>
           </Link>
+          <Route path="/modify">
+            <Modify answer={answer} setAnswer={setAnswer}/>
+          </Route>
           <img src={Line}></img> 
           <div onClick={showDelete}>
             <img src={delete_normal}></img>
