@@ -27,6 +27,8 @@ function List() {
   const [ answer, setAnswer ] = useState("나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 200자 일 때 모습입니다")
   const [startDate, setStartDate] = useState(new Date());
 
+
+
   const deleteModalContainer = useRef()
   function showDelete(e) {
     setDeletes(true);
@@ -47,7 +49,7 @@ function List() {
   useEffect(() => {
     axios(
       {
-        url : "/answers/343/1",
+        url : "/answers/343/1", // /answers/{question_num}/{member_num}
         method : "get",
         baseURL : "http://61.72.99.219:9130"
     }
@@ -83,7 +85,7 @@ function List() {
 
   function goTrash() {
     axios(
-      { url : "/answers/trashes/{answer_num}/{member_num}", // /answers/trashes/{answer_num}/{member_num} 
+      { url : "/answers/trashes/29/1", // /answers/trashes/{answer_num}/{member_num} 
         method : "patch",
         baseURL : "http://61.72.99.219:9130"
     }).then((response) => {
@@ -141,7 +143,38 @@ function List() {
         <img src={xxxxx} onClick={closeCanlender}></img>
         <DatePicker
           selected={startDate}
-          onChange={(date) => setStartDate(date)}
+          onChange={(date) => {
+            setStartDate(date)
+            console.log(date)
+            const now = date
+            const start = new Date(now.getFullYear(), 0, 0);
+            const diff = now - start;
+            const oneDay = 1000 * 60 * 60 * 24;
+            const day = Math.floor(diff / oneDay) + 1;
+            console.log(day);
+            axios({
+              url : `/question/calendars/${day}`,
+              method : "get",
+              baseURL: 'http://61.72.99.219:9130',
+            }).then(function (response) {
+              console.log(response.data);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+            axios(
+              {
+                url : `/answers/${day}/1`, // /answers/{question_num}/{member_num}
+                method : "get",
+                baseURL : "http://61.72.99.219:9130"
+            }
+            ).then(function(response) {
+              console.log(response.data);
+            })
+            .catch(function(error) {
+              console.log(error);
+            })
+          }}
           locale={ko}
           dateFormat="MM월 dd일"
           inline

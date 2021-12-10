@@ -34,7 +34,7 @@ function Trash() {
     },
     { question_num : "343",
       answer_date : "1208",
-      answer_year : "2021",
+      answer_year : "2020",
       answer : "똥2"
     }
   ]
@@ -72,7 +72,7 @@ function Trash() {
   function oneRemove() {
     axios(
       {
-        url : "/trashes/{answer_num}", // /trashes/{answer_num}
+        url : "/trashes/28", // /trashes/{answer_num}
         method : "delete",
         baseURL : "http://61.72.99.219:9130"
     }
