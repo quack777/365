@@ -6,6 +6,8 @@ import Line from '../images/Line45.png';
 import axios from "axios";
 
 function Trash() {
+  const [member, setMember] = useState();
+  const [trashAllData, setTrashAlldata] = useState();
   const a = [
     { question_num : "344",
       answer_date : "1209",
@@ -40,14 +42,18 @@ function Trash() {
   ]
 
   useEffect(() => {
+    const member_num = localStorage.getItem('member_num');
+    console.log(member_num)
+    setMember(Number(member_num));
     axios(
       {
-      url : "/trashes/1", // /trashes/{member_num}
+      url : "/trashes/2", // /trashes/{member_num}
       method : "get",
       baseURL : "http://61.72.99.219:9130"
     }
     ).then(function(response) {
       console.log(response.data);
+      setTrashAlldata(response.data);
     })
     .catch(function (error) {
       console.log(error);
@@ -72,7 +78,7 @@ function Trash() {
   function oneRemove() {
     axios(
       {
-        url : "/trashes/28", // /trashes/{answer_num}
+        url : `/trashes/{answer_num}`, // /trashes/{answer_num}
         method : "delete",
         baseURL : "http://61.72.99.219:9130"
     }
@@ -84,10 +90,11 @@ function Trash() {
     })
   }
 
-  function revert() {
+  function revert(a) {
+    console.log(a);
     axios(
       {
-        url : "/trashes/settings/{answer_num}/{member_num}", // /trashes/settings/{answer_num}/{member_num}
+        url : `/trashes/settings/{answer_num}/${member}`, // /trashes/settings/{answer_num}/{member_num}
         method : "patch",
         baseURL : "http://61.72.99.219:9130"
       })

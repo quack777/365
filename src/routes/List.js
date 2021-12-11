@@ -14,6 +14,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from 'date-fns/esm/locale';
 
+
 function List() {
   const NewDate = new Date();
   const month = NewDate.getMonth() + 1;
@@ -26,7 +27,8 @@ function List() {
   const [ open, setOpen ] = useState(false);
   const [ answer, setAnswer ] = useState("나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 200자 일 때 모습입니다")
   const [startDate, setStartDate] = useState(new Date());
-
+  const [dataAnswer, setDataAnswer] = useState();
+  const [dataYear, setDataYear] = useState();
 
 
   const deleteModalContainer = useRef()
@@ -47,18 +49,38 @@ function List() {
   }
   
   useEffect(() => {
+    var now = new Date();
+    var start = new Date(now.getFullYear(), 0, 0);
+    var diff = now - start;
+    var oneDay = 1000 * 60 * 60 * 24;
+    var day = Math.floor(diff / oneDay) + 1;
     axios(
       {
-        url : "/answers/343/1", // /answers/{question_num}/{member_num}
+        url : `/answers/${day}/1`, // /answers/{question_num}/{member_num}
         method : "get",
         baseURL : "http://61.72.99.219:9130"
     }
     ).then(function(response) {
       console.log(response.data);
+      const aa = response.data;
+      const answer = aa.map(aa => {
+        return(
+          aa.answer
+        )
+      })
+      console.log(answer);
+      setDataAnswer(answer);
+      const answer_year = aa.map(aa => {
+        return(
+          aa.answer_year
+        )
+      })
+      console.log(answer_year);
+      setDataYear(answer_year);
     })
-    .catch(function(error) {
+    .catch(function (error) {
       console.log(error);
-    })
+    });
   }, [])
 
   useEffect(() => {
@@ -85,7 +107,7 @@ function List() {
 
   function goTrash() {
     axios(
-      { url : "/answers/trashes/29/1", // /answers/trashes/{answer_num}/{member_num} 
+      { url : "/answers/trashes/{answer_num}/{member_num}", // /answers/trashes/{answer_num}/{member_num} 
         method : "patch",
         baseURL : "http://61.72.99.219:9130"
     }).then((response) => {
@@ -108,8 +130,8 @@ function List() {
       <div className="list">
         <hr></hr>
         <div className="watch">
-          <p>2021년의 나:</p>
-          <p>{answer}</p>
+          <p>{dataYear}년의 나:</p>
+          <p>{dataAnswer}</p>
         </div>
         <div className="buttons">
           <p>전체공개</p>
@@ -118,14 +140,34 @@ function List() {
               <img src={modify_normal}></img>
             </div>
           </Link>
-          <Route path="/modify">
-            <Modify answer={answer} setAnswer={setAnswer}/>
-          </Route>
           <img src={Line}></img> 
           <div onClick={showDelete}>
             <img src={delete_normal}></img>
           </div>
         </div>
+        {dataAnswer.map((an, index) => {
+          return(
+            <div>
+            <hr></hr>
+              <div className="watch">
+                <p>{dataYear[index]}년의 나:</p>
+                <p>{an}</p>
+              </div>
+              <div className="buttons">
+                <p>전체공개</p>
+                <Link to="/modify">
+                  <div>
+                    <img src={modify_normal}></img>
+                  </div>
+                </Link>
+                <img src={Line}></img> 
+                <div onClick={showDelete}>
+                  <img src={delete_normal}></img>
+                </div>
+              </div>
+            </div>
+          )
+        })}
       </div>
       {deletes ?
       (<div className="deleteModal" ref={deleteModalContainer}>
@@ -158,6 +200,7 @@ function List() {
               baseURL: 'http://61.72.99.219:9130',
             }).then(function (response) {
               console.log(response.data);
+              setQuestion(response.data.question);
             })
             .catch(function (error) {
               console.log(error);
@@ -170,10 +213,25 @@ function List() {
             }
             ).then(function(response) {
               console.log(response.data);
+              const aa = response.data;
+              const answer = aa.map(aa => {
+                return(
+                  aa.answer
+                )
+              })
+              console.log(answer);
+              setDataAnswer(answer);
+              const answer_year = aa.map(aa => {
+                return(
+                  aa.answer_year
+                )
+              })
+              console.log(answer_year);
+              setDataYear(answer_year);
             })
-            .catch(function(error) {
+            .catch(function (error) {
               console.log(error);
-            })
+            });
           }}
           locale={ko}
           dateFormat="MM월 dd일"

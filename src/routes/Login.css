@@ -136,8 +136,11 @@
   align-items: center;
   align-self: center;
 }
+.Login > section:nth-child(2) .button a {
+  text-decoration: none;
+}
 
-.Login > section:nth-child(2) .button > p {
+.Login > section:nth-child(2) .button p {
   font-family: Spoqa Han Sans Neo;
   font-style: normal;
   font-weight: 500;

@@ -114,14 +114,13 @@ function Login () {
         <p>카카오톡 계정으로 1초 안에 로그인하세요.</p>
         <div className="button">
           <img src={kaka}></img>
-          <p onClick={kakaoLogin}>카카오톡으로 계속</p>
+          <a href={KAKAO_AUTH_URL}><p>카카오톡으로 계속</p></a>
         </div>
         <div className="pp">
           <p>신규사용자이신가요?</p>
           <p>카카오 회원가입하기</p>
         </div>
       </section>
-      <a href={KAKAO_AUTH_URL}>가나요</a>
     </div>
   )
 }

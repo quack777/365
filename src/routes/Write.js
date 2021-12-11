@@ -19,6 +19,7 @@ function Write () {
   const [open, setOpen] = useState(false);
   const [publica, setPublica] = useState("N");
   const [questionN, setQuestionN] = useState();
+  const [member, setMember] = useState();
 
   function writeSubmit(e) {
     e.preventDefault();
@@ -41,8 +42,7 @@ function Write () {
       answer : answer,
       public_answer : publica,
       question_num : questionN,
-      member_num : 1,
-      answer_delete : null
+      member_num : member
     })
     .then(function (response) {
       console.log(response);
@@ -81,6 +81,10 @@ function Write () {
     const diff = now - start;
     const oneDay = 1000 * 60 * 60 * 24;
     const day = Math.floor(diff / oneDay) + 1;
+    const member_num = localStorage.getItem('member_num');
+    console.log(member_num)
+    setMember(Number(member_num));
+
     axios(
       {
         url: `/question/${day}`,
@@ -115,8 +119,8 @@ function Write () {
           </div>
           <div className="twoBtn">
             <Link to="/365"><p id="first">작성취소</p></Link>
-            <Link to="/list"><p id="second" onClick={sendData}>저장하기</p></Link>
-            {/* <button type="submit" id="second" onClick={sendData}>저장하기</button> */}
+            <Link to="/list"><button id="second" type="submit">저장하기</button></Link>
+            {/* <Link to="/list"><p id="second" onClick={sendData}>저장하기</p></Link> */}
           </div>
         </div>
       </form>

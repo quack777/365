@@ -91,6 +91,7 @@ function Home () {
       }
     ).then(function (response) {
       console.log(response.data);
+      setAnswer8(response.data)
     })
     .catch(function (error) {
       console.log(error);

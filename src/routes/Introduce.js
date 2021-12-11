@@ -1,10 +1,28 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import './Introduce.css';
 import Introduce_top from '../images/07.png';
 import ballon from '../images/Group 5582.png';
 import { Link } from 'react-router-dom';
 import made_people from "../images/made_people.png";
+import soga00 from "../images/soga00.png";
+import soga01 from "../images/soga01.png";
+import soga02 from "../images/soga02.png";
+import soga03 from "../images/soga03.png";
+import soga04 from "../images/soga04.png";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
+
 function Introduce() {
+
+  const imagea = [
+    {soga00},
+    {soga01},
+    {soga02},
+    {soga03},
+    {soga04}
+  ]
+
+  const img = useRef()
   return(
     <div className="Introduce">
       <section className="top">
@@ -21,7 +39,23 @@ function Introduce() {
       <hr></hr>
       <section className="casual">
         <p>365 알차게 사용하기</p>
-        <div className="이미지 넘기기"></div>
+        <Carousel>
+            <div>
+                <img src={soga00} />
+            </div>
+            <div>
+                <img src={soga01} />
+            </div>
+            <div>
+                <img src={soga02} />
+            </div>
+            <div>
+                <img src={soga03} />
+            </div>
+            <div>
+                <img src={soga04} />
+            </div>
+        </Carousel>
         <div>
           <p>회원가입/로그인</p>
           <p>카카오로 간편하게 회원가입과 로그인을 할 수 있어요.</p>
