@@ -7,7 +7,7 @@ import axios from "axios";
 
 function Trash() {
   const [member, setMember] = useState();
-  const [trashAllData, setTrashAlldata] = useState();
+  const [trashAllData, setTrashAlldata] = useState(["answer"]);
   const a = [
     { question_num : "344",
       answer_date : "1209",
@@ -47,7 +47,7 @@ function Trash() {
     setMember(Number(member_num));
     axios(
       {
-      url : "/trashes/2", // /trashes/{member_num}
+      url : "/trashes/6", // /trashes/{member_num}
       method : "get",
       baseURL : "http://61.72.99.219:9130"
     }
@@ -75,10 +75,12 @@ function Trash() {
       })
   }
 
-  function oneRemove() {
+  function oneRemove(index) {
+    console.log(index);
+    const answer_num = trashAllData[index].answer_num;
     axios(
       {
-        url : `/trashes/{answer_num}`, // /trashes/{answer_num}
+        url : `/trashes/${answer_num}`, // /trashes/{answer_num}
         method : "delete",
         baseURL : "http://61.72.99.219:9130"
     }
@@ -90,11 +92,12 @@ function Trash() {
     })
   }
 
-  function revert(a) {
-    console.log(a);
+  function revert(index) {
+    console.log(index);
+    const answer_num = trashAllData[index].answer_num;
     axios(
       {
-        url : `/trashes/settings/{answer_num}/${member}`, // /trashes/settings/{answer_num}/{member_num}
+        url : `/trashes/settings/${answer_num}/${member}`, // /trashes/settings/{answer_num}/{member_num}
         method : "patch",
         baseURL : "http://61.72.99.219:9130"
       })
@@ -114,7 +117,7 @@ function Trash() {
       </div>
       <p>휴지통에 있는 일기는 7일이 지나면 완전히 삭제됩니다</p>
       <section>
-        <div>
+        {/* <div>
           <hr></hr>
           <div className="question">
             <p>11월 20일</p>
@@ -129,23 +132,23 @@ function Trash() {
             <img src={Line}></img>
             <img onClick={oneRemove} src={delete_normal}></img>
           </div>
-        </div>
-        {a.map((a, index) => {
+        </div> */}
+        {trashAllData.map((data, index) => {
           return(
             <div>
               <hr></hr>
               <div className="question">
-                <p>{a.answer_date}</p>
-                <p>{a.question_num}으로 질문 api호출해야함</p>
+                <p>{data.answer_date && data.answer_date.substring(0,2)}월 {data.answer_date && data.answer_date.substring(2,4)}일</p>
+                <p>{data.question_num}으로 질문 api호출해야함</p>
               </div>
               <div className="answers">
-                <p>{a.answer_year}년의 나:</p>
-                <p>{a.answer}</p>
+                <p>{data.answer_year}년의 나:</p>
+                <p>{data.answer}</p>
               </div>
               <div className="btns">
-                <img onClick={revert} src={restore_normal}></img>
+                <img onClick={() => revert(index)} src={restore_normal}></img>
                 <img src={Line}></img>
-                <img onClick={oneRemove} src={delete_normal}></img>
+                <img onClick={() => oneRemove(index)} src={delete_normal}></img>
               </div>
             </div>
           )

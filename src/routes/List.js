@@ -27,8 +27,8 @@ function List() {
   const [ open, setOpen ] = useState(false);
   const [ answer, setAnswer ] = useState("나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 200자 일 때 모습입니다")
   const [startDate, setStartDate] = useState(new Date());
-  const [dataAnswer, setDataAnswer] = useState();
-  const [dataYear, setDataYear] = useState();
+  const [dataAnswer, setDataAnswer] = useState(["나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 200자 일 때 모습입니다"]);
+  const [dataYear, setDataYear] = useState(["2020"]);
 
 
   const deleteModalContainer = useRef()

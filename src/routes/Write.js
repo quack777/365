@@ -36,6 +36,12 @@ function Write () {
     const date = String(now.getDate()).padStart(2, "0");
     const answerDate = `${month}${date}`;
 
+    console.log(year)
+    console.log(answerDate)
+    console.log(answer)
+    console.log(publica)
+    console.log(questionN)
+    console.log(typeof member)
     axios.post('http://61.72.99.219:9130/answers/new', {
       answer_year : year,
       answer_date : answerDate,
@@ -119,7 +125,7 @@ function Write () {
           </div>
           <div className="twoBtn">
             <Link to="/365"><p id="first">작성취소</p></Link>
-            <Link to="/list"><button id="second" type="submit">저장하기</button></Link>
+            <button id="second" type="submit">저장하기</button>
             {/* <Link to="/list"><p id="second" onClick={sendData}>저장하기</p></Link> */}
           </div>
         </div>

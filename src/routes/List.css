@@ -55,12 +55,12 @@
   flex-direction: column;
 }
 
-.List > .list > .watch {
+.List > .list .watch {
   display: flex;
   justify-content: space-between;
 }
 
-.List > .list > .watch > p:nth-child(1) {
+.List > .list .watch > p:nth-child(1) {
   font-family: Spoqa Han Sans Neo;
   font-style: normal;
   font-weight: bold;
@@ -72,7 +72,7 @@
 
   color: #084861;
 }
-.List > .list > .watch > p:nth-child(2) {
+.List > .list .watch > p:nth-child(2) {
   font-family: Spoqa Han Sans Neo;
   font-style: normal;
   font-weight: normal;
@@ -99,13 +99,13 @@
   height: auto;
 }
 
-.List > .list > .buttons {
+.List > .list .buttons {
   display: flex;
   align-self: flex-end;
   align-items: center;
 }
 
-.List > .list > .buttons > p {
+.List > .list .buttons > p {
   font-family: Spoqa Han Sans Neo;
   font-style: normal;
   font-weight: 500;
@@ -130,25 +130,25 @@
   margin-right: 43px;
 } */
 
-.List > .list > .buttons > img {
+.List > .list .buttons > img {
   object-fit: contain;
   margin: 0 10px;
 }
 
-.List > .list > .buttons > div {
+.List > .list .buttons > div {
   align-self: center;
 }
 
-.List > .list > .buttons div > img {
+.List > .list .buttons div > img {
   border-radius: 16px;
   padding: 5px 15px;
 }
 
-.List > .list > .buttons div > img:hover {
+.List > .list .buttons div > img:hover {
   background: #f1faf0;
 }
 
-.List > .list > .buttons div > img:active {
+.List > .list .buttons div > img:active {
   background: #d8e8d6;
 }
 
