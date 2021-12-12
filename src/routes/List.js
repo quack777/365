@@ -29,6 +29,7 @@ function List() {
   const [startDate, setStartDate] = useState(new Date());
   const [dataAnswer, setDataAnswer] = useState(["나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 200자 일 때 모습입니다"]);
   const [dataYear, setDataYear] = useState(["2020"]);
+  const [member, setMember] = useState();
 
 
   const deleteModalContainer = useRef()
@@ -49,6 +50,10 @@ function List() {
   }
   
   useEffect(() => {
+    const member_num = localStorage.getItem('member_num');
+    console.log(member_num)
+    setMember(Number(member_num));
+
     var now = new Date();
     var start = new Date(now.getFullYear(), 0, 0);
     var diff = now - start;
@@ -106,8 +111,9 @@ function List() {
   }, [])
 
   function goTrash() {
+    
     axios(
-      { url : "/answers/trashes/{answer_num}/{member_num}", // /answers/trashes/{answer_num}/{member_num} 
+      { url : `/answers/trashes/{answer_num}/${member}`, // /answers/trashes/{answer_num}/{member_num} 
         method : "patch",
         baseURL : "http://61.72.99.219:9130"
     }).then((response) => {
@@ -127,7 +133,7 @@ function List() {
         </div>
         <img src={monthBTN} onClick={seeCalender}></img>
       </div>
-      <div className="list">
+      {/* <div className="list">
         <hr></hr>
         <div className="watch">
           <p>{dataYear}년의 나:</p>
@@ -135,7 +141,7 @@ function List() {
         </div>
         <div className="buttons">
           <p>전체공개</p>
-          <Link to="/modify">
+          <Link to="/Write">
             <div>
               <img src={modify_normal}></img>
             </div>
@@ -144,18 +150,18 @@ function List() {
           <div onClick={showDelete}>
             <img src={delete_normal}></img>
           </div>
-        </div>
+        </div> */}
         {dataAnswer.map((an, index) => {
           return(
-            <div>
-            <hr></hr>
+            <div className="list">
+              <hr></hr>
               <div className="watch">
                 <p>{dataYear[index]}년의 나:</p>
                 <p>{an}</p>
               </div>
               <div className="buttons">
                 <p>전체공개</p>
-                <Link to="/modify">
+                <Link to="/write">
                   <div>
                     <img src={modify_normal}></img>
                   </div>
@@ -168,7 +174,7 @@ function List() {
             </div>
           )
         })}
-      </div>
+      {/* </div> */}
       {deletes ?
       (<div className="deleteModal" ref={deleteModalContainer}>
         <img onClick={xDelete} src={xxxxx}></img>

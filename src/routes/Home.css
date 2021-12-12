@@ -202,3 +202,54 @@
 .Home .btnBox > img:nth-child(1) {
   transform: rotateY(180deg);
 }
+
+.Home #bottom {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  align-self: flex-end;
+}
+
+.Home #bottom div {
+  align-self: center;
+}
+
+.Home #bottom p:nth-child(1) {
+  font-family: Spoqa Han Sans Neo;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 149.2%;
+  /* or 45px */
+
+  color: #084861;
+  margin: 0px;
+}
+
+.Home #bottom p:nth-child(2) {
+  font-family: Spoqa Han Sans Neo;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 149.2%;
+  /* or 45px */
+
+  color: #084861;
+  margin: 0px;
+}
+
+.Home #bottom p:nth-child(3) {
+  font-family: Spoqa Han Sans Neo;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 174.2%;
+  /* or 26px */
+
+  color: #084861;
+  width: 350px;
+}
+
+.Home img {
+  align-self: flex-end;
+}

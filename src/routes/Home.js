@@ -5,6 +5,7 @@ import VectorLeft from '../images/Vector left.png';
 import VectorRight from '../images/Vector right.png';
 import Vector from '../images/Vector 1.png';
 import arrow from '../images/arrow01_normal.png';
+import main from '../images/mainpage.png';
 import './Home.css';
 import { Link } from 'react-router-dom';
 
@@ -136,6 +137,14 @@ function Home () {
           <img src={Vector} alt="vector"></img>
         </button>
       </Link>
+      <div id="bottom">
+        <div>
+          <p>365개의 질문, 그리고 나와 나를 연결할 기록들.</p>
+          <p>그리고 나와 나를 연결할 기록들.</p>
+          <p>매일 달라지는 질문에 답해보세요. 사소하지만 큰 기록은 분명 당신과 당신을 이어주는 고리가 될거예요. 3년 동안의 기록을 차곡차곡 모으고,  찬찬히 나를 만나봐요.</p>
+        </div>
+        <img src={main}></img>
+      </div>
     </div>
   )
 }
