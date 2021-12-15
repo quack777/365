@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import toggle_unselected from "../images/main_private.png";
 import toggle_selected from "../images/main_public.png";
 import axios, { Axios } from 'axios';
@@ -108,6 +108,10 @@ function Write () {
       });
   }, [])
 
+  const loca = useLocation();
+  useEffect(() => {
+    console.log(loca.state);
+  }, [])
   return(
     <div className="Write">
       <div className="questions">

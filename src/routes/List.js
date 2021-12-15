@@ -31,6 +31,7 @@ function List() {
   const [dataYear, setDataYear] = useState(["2020"]);
   const [member, setMember] = useState();
   const [deleteIndex, setDelteIndex] = useState();
+  const [answerNum, setAnswerNum] = useState();
 
   const deleteModalContainer = useRef()
   function showDelete(index) {
@@ -83,6 +84,13 @@ function List() {
       })
       console.log(answer_year);
       setDataYear(answer_year);
+      const answer_num = aa.map(aa => {
+        return(
+          aa.answer_num
+        )
+      })
+      console.log(answer_num);
+      setAnswerNum(answer_num);
     })
     .catch(function (error) {
       console.log(error);
@@ -112,14 +120,15 @@ function List() {
   }, [])
 
   function goTrash() {
-    setDataAnswer(dataAnswer.splice(deleteIndex, 1));
-    console.log(dataAnswer)
+    setDataAnswer(dataAnswer.filter((answer, index) => index !== deleteIndex)); //실제에서는 .then안에
+    const aN = answerNum[deleteIndex];
     axios(
-      { url : `/answers/trashes/{answer_num}/${member}`, // /answers/trashes/{answer_num}/{member_num} 
+      { url : `/answers/trashes/${aN}/${member}`, // /answers/trashes/{answer_num}/{member_num} 
         method : "patch",
         baseURL : "http://61.72.99.219:9130"
     }).then((response) => {
       console.log(response);
+      setAnswerNum(answerNum.filter((an, index) => index !== deleteIndex));
     })
     .catch((error) => {
       console.log(error);
@@ -145,7 +154,12 @@ function List() {
               </div>
               <div className="buttons">
                 <p>전체공개</p>
-                <Link to="/write">
+                <Link to={{
+                  pathname : "/write",
+                  state: {
+                    aa : {an}
+                  }
+                }}>
                   <div>
                     <img src={modify_normal}></img>
                   </div>
@@ -170,7 +184,7 @@ function List() {
         </section>
       </div>)
       : null}
-
+      
       {calender ? 
       (<div className="calendar">
         <img src={xxxxx} onClick={closeCanlender}></img>
