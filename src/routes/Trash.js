@@ -4,6 +4,7 @@ import delete_normal from '../images/delete_normal.png';
 import restore_normal from '../images/restore_normal.png';
 import Line from '../images/Line45.png';
 import axios from "axios";
+import xxxxx from '../images/xxxxx.png';
 
 function Trash() {
   const [member, setMember] = useState();
@@ -59,7 +60,7 @@ function Trash() {
     setMember(Number(member_num));
     axios(
       {
-      url : "/trashes/6", // /trashes/{member_num}
+      url : "/trashes/6", // 실제 => `/trashes/${member_num}`
       method : "get",
       baseURL : "http://61.72.99.219:9130"
     }
@@ -181,4 +182,33 @@ function Trash() {
   )
 }
 
-export default Trash
+function DeleteModal() {
+  function goTrash() {
+    axios(
+      { url : `/answers/trashes/{answer_num}/{}`, // /answers/trashes/{answer_num}/{member_num} 
+        method : "patch",
+        baseURL : "http://61.72.99.219:9130"
+    }).then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+  function xDelete() {
+    // setDeletes(false);
+  }
+  return(
+    <div className="deleteModal">
+      <img onClick={xDelete} src={xxxxx}></img>
+      <p>답변을 정말 삭제하시겠어요?</p>
+      <p>삭제된 답변은 휴지통에 일주일 동안 보관됩니다</p>
+      <section>
+        <p onClick={goTrash}>삭제하기</p>
+        <p onClick={xDelete}>취소하기</p>
+      </section>
+    </div>
+  )
+}
+
+export default Trash;

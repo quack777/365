@@ -66,23 +66,6 @@ function Introduce() {
       <hr></hr>
       <section className="casual">
         <p>365 알차게 사용하기</p>
-        {/* <Carousel>
-            <div>
-                <img src={soga00} />
-            </div>
-            <div>
-                <img src={soga01} />
-            </div>
-            <div>
-                <img src={soga02} />
-            </div>
-            <div>
-                <img src={soga03} />
-            </div>
-            <div>
-                <img src={soga04} />
-            </div>
-        </Carousel> */}
         <button onClick={prevSlide}>왼쪽</button>
         <button onClick={nextSlide}>오른쪽</button>
         {slideData.map((slide, index) => {
