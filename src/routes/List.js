@@ -111,7 +111,6 @@ function List() {
   }, [])
 
   function goTrash() {
-    
     axios(
       { url : `/answers/trashes/{answer_num}/${member}`, // /answers/trashes/{answer_num}/{member_num} 
         method : "patch",

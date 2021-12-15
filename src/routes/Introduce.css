@@ -36,7 +36,7 @@
 .Introduce > .top > p:nth-child(2) {
   font-family: Spoqa Han Sans Neo;
   font-style: normal;
-  font-weight: bold;
+  font-weight: 600;
   font-size: 15px;
   line-height: 174.2%;
   /* or 26px */
@@ -96,7 +96,7 @@
 }
 
 .Introduce > .goHome {
-  width: 100vw;
+  width: 99vw;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -143,7 +143,7 @@
 
   background: #7eb496;
   border-radius: 16px;
-  padding: 18px 39px;
+  padding: 18px 59px;
   margin-top: 0px;
 }
 
@@ -187,7 +187,7 @@
   align-self: center;
 }
 
-.casual > div > p:nth-child(1) {
+.casual > div > p:nth-child(2) {
   font-family: Spoqa Han Sans Neo;
   font-style: normal;
   font-weight: bold;
@@ -198,7 +198,7 @@
   color: #323436;
 }
 
-.casual > div > p:nth-child(2) {
+.casual > div > p:nth-child(3) {
   font-family: Spoqa Han Sans Neo;
   font-style: normal;
   font-weight: normal;

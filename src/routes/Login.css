@@ -22,12 +22,19 @@
   padding-top: 10vh;
 }
 
-.Login > section:nth-child(1) > p:nth-child(2) {
+.Login > section:nth-child(1) .slide {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Login > section:nth-child(1) .slide > p:nth-child(2) {
   font-family: Spoqa Han Sans Neo;
   font-style: normal;
   font-weight: bold;
-  font-size: 25px;
-  line-height: 31px;
+  font-size: 18.75px;
+  line-height: 23px;
   text-align: center;
 
   /* color/sub/blue */
@@ -35,7 +42,7 @@
   color: #084861;
 }
 
-.Login .overflow {
+/* .Login .overflow {
   overflow: hidden;
   width: 457px;
   height: auto;
@@ -47,15 +54,15 @@
   animation-name: aa;
   animation-duration: 15s;
   animation-iteration-count: infinite;
-}
+} */
 
-.Login .overflow p {
+.Login > section:nth-child(1) .slide > p:nth-child(3) {
   font-family: Spoqa Han Sans Neo;
   font-style: normal;
   font-weight: normal;
-  font-size: 16px;
+  font-size: 12px;
   line-height: 170%;
-  /* or 27px */
+  /* or 20px */
 
   text-align: center;
 
@@ -64,18 +71,17 @@
   color: #98999c;
 
   flex: 0 0 auto;
-  width: 457px;
   height: auto;
 }
 
-.Login > section:nth-child(1) > div > img {
+.Login > section:nth-child(1) > .changeBtns > img {
   background: #e3e3e3;
   margin: 0px 10px;
   padding: 7px 9px;
   border-radius: 50%;
 }
 
-.Login > section:nth-child(1) > div > img:nth-child(1) {
+.Login > section:nth-child(1) > .changeBtns > img:nth-child(1) {
   transform: rotateY(180deg);
 }
 

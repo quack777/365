@@ -1,6 +1,8 @@
 import React from "react";
 import { useEffect, useRef, useState } from "react";
 import loginImage from "../images/loginImage.png";
+import login01 from "../images/loginpage01.png";
+import login02 from "../images/loginpage02.png";
 import rigthArrow from '../images/Vector 1.png';
 import kaka from '../images/kakao.png';
 import { Link, useHistory } from 'react-router-dom';
@@ -17,16 +19,34 @@ function Login () {
   const number_ref = useRef(0);
   const [days, setDays] = useState();
   const [code, setCode] = useState();
+  
+  const slideData = [
+    {
+      img : login01,
+      title : "365개의 질문, 그리고 나와 나를 연결할 기록들.",
+      pp : "매일 달라지는 질문에 답해 보세요. 사소하지만 큰 기록은 분명 당신과 당신을 이어주는 고리가 될거에요."
+    },
+    {
+      img : login02,
+      title : "소중한 오늘의 질문을 놓치지 마세요!",
+      pp : "날짜마다 질문이 달라져요. 답변은 그날까지만 작성, 수정이 가능해요."
+    }
+  ]
 
-  useEffect(() => {
-    var now = new Date();
-    var start = new Date(now.getFullYear(), 0, 0);
-    var diff = now - start;
-    var oneDay = 1000 * 60 * 60 * 24;
-    var day = Math.floor(diff / oneDay) + 1;
-    setDays(day)
-    console.log(days)
-  },[])
+  const [current, setCurrent] = useState(0);
+  const length = slideData.length; 
+
+  const nextSlide = () => {
+    setCurrent(current === length - 1 ? 0 : current + 1);
+  }
+
+  const prevSlide = () => {
+    setCurrent(current === 0 ? length - 1 : current -1);
+  }
+
+  if (!Array.isArray(slideData) || slideData.length <=0) {
+    return null;
+  }
 
   // function repeat() {
   //   if(num === 0 ) {
@@ -51,9 +71,6 @@ function Login () {
   //     box.current.style.transform = `translateX(${num}%)`;
   //   }, 2000);
   // }, [])
-
-
-  const history = useHistory()
 
   function kakaoLogin() {
     axios(
@@ -91,10 +108,11 @@ function Login () {
       console.log(error);
     });
   }
+
   return(
     <div className="Login">
       <section>
-        <img src={loginImage}></img>
+        {/* <img src={loginImage}></img>
         <p>365개의 질문, 그리고 나와 나를 연결할 기록들.</p>
         <div className="overflow">
           <div className="box" ref={box}>
@@ -103,11 +121,26 @@ function Login () {
             <p>매일 달라지는 질문에 답해 보세요. 사소하지만 큰 기록은 분명 당신과 당신을 이어주는 고리가 될거에요.</p>
             <p>날짜마다 질문이 달라져요. 답변은 그날까지만 작성, 수정이 가능해요.</p>
           </div>
-        </div>
-        {/* <div>
-          <img src={rigthArrow}></img>
-          <img src={rigthArrow}></img>
         </div> */}
+        {slideData.map((slide, index) => {
+          return (
+            <div className={index === current ? 'slide active' : 'slide'} key = {index}>
+              {index === current && (
+                <img src={slide.img} className="image" />
+              )}
+              {index === current && (
+                <p>{slide.title}</p>
+              )}
+              {index === current && (
+                <p>{slide.pp}</p>
+              )}
+            </div>
+          )
+        })}
+        <div className="changeBtns">
+          <img onClick={prevSlide} src={rigthArrow}></img>
+          <img onClick={nextSlide} src={rigthArrow}></img>
+        </div>
       </section>
       <section>
         <p>로그인</p>

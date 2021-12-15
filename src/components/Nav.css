@@ -6,7 +6,7 @@
   padding-left: 86px;
   padding-right: 119px;
   box-sizing: border-box;
-  width: 100vw;
+  width: 100%;
 }
 
 .Nav a {
@@ -61,9 +61,37 @@
 }
 
 .Nav > #nav_btn > a:active {
-  background-color: red;
+  font-family: Spoqa Han Sans Neo;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 13.5px;
+  line-height: 17px;
+  /* identical to box height */
+
+  text-align: center;
+
+  /* color/sub/blue */
+
+  color: #084861;
 }
 
 .Nav > #nav_btn > a:visited {
   text-decoration: none;
+}
+
+.bctive {
+  font-family: Spoqa Han Sans Neo;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 13.5px;
+  line-height: 17px;
+  /* identical to box height */
+
+  text-align: center;
+
+  /* color/sub/blue */
+
+  color: #084861;
+
+  border-bottom: 2px solid #084861;
 }

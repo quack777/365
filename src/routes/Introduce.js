@@ -13,16 +13,43 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from 'react-responsive-carousel';
 
 function Introduce() {
-
-  const imagea = [
-    {soga00},
-    {soga01},
-    {soga02},
-    {soga03},
-    {soga04}
+  const slideData = [
+    {img: soga00,
+    title : "회원가입/로그인",
+    pp : "카카오로 간편하게 회원가입과 로그인을 할 수 있어요.",
+    },
+    {img : soga01,
+    title : "메인페이지",
+    pp : "공개 설정한 일기에 한해 랜덤으로 다른 사람들의 이야기를 볼 수 있어요."
+    },
+    {img : soga02,
+    title : "나의 일기장",
+    pp : "내 일기장에서 누적된 내 일기들을 날짜별로 모아 볼 수 있어요."
+    },
+    {img : soga03,
+    title : "휴지통",
+    pp : "삭제된 일기는 휴지통에 7일간 보관됩니다. 삭제되기 전, 다시 되돌릴 수도 있어요."
+    },
+    {img : soga04,
+    title : "잠깐!",
+    pp : "해당 날짜마다 질문이 달라져요. 답변은 그 날까지만 작성, 수정이 가능해요. 오늘의 질문을 놓치지 마세요!" 
+    }
   ]
+  const [current, setCurrent] = useState(0);
+  const length = slideData.length; 
 
-  const img = useRef()
+  const nextSlide = () => {
+    setCurrent(current === length - 1 ? 0 : current + 1);
+  }
+
+  const prevSlide = () => {
+    setCurrent(current === 0 ? length - 1 : current -1);
+  }
+
+  if (!Array.isArray(slideData) || slideData.length <=0) {
+    return null;
+  }
+
   return(
     <div className="Introduce">
       <section className="top">
@@ -39,7 +66,7 @@ function Introduce() {
       <hr></hr>
       <section className="casual">
         <p>365 알차게 사용하기</p>
-        <Carousel>
+        {/* <Carousel>
             <div>
                 <img src={soga00} />
             </div>
@@ -55,11 +82,28 @@ function Introduce() {
             <div>
                 <img src={soga04} />
             </div>
-        </Carousel>
-        <div>
+        </Carousel> */}
+        <button onClick={prevSlide}>왼쪽</button>
+        <button onClick={nextSlide}>오른쪽</button>
+        {slideData.map((slide, index) => {
+          return (
+            <div className={index === current ? 'slide active' : 'slide'} key = {index}>
+              {index === current && (
+                <img src={slide.img} className="image" />
+              )}
+              {index === current && (
+                <p>{slide.title}</p>
+              )}
+              {index === current && (
+                <p>{slide.pp}</p>
+              )}
+            </div>
+          )
+        })}
+        {/* <div>
           <p>회원가입/로그인</p>
           <p>카카오로 간편하게 회원가입과 로그인을 할 수 있어요.</p>
-        </div> 
+        </div>  */}
       </section>
       <section className="goHome">
         <p>“나와 나를 연결할 준비, 되셨나요?”</p>

@@ -89,6 +89,7 @@
   align-self: flex-start;
 
   max-width: 759px;
+  min-width: 759px;
 }
 
 .List > .list hr {

@@ -49,6 +49,8 @@
 
   position: relative;
   left: 70px;
+
+  display: none;
 }
 
 .Trash > p {
@@ -160,4 +162,18 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.Trash section .btns > img {
+  padding: 5px 15px;
+}
+
+.Trash section .btns > img:hover {
+  background: #f1faf0;
+  border-radius: 11.71px;
+}
+
+.Trash section .btns > img:active {
+  background: #d8e8d6;
+  border-radius: 11.71px;
 }

@@ -125,7 +125,7 @@ function Write () {
           </div>
           <div className="twoBtn">
             <Link to="/365"><p id="first">작성취소</p></Link>
-            <button id="second" type="submit">저장하기</button>
+            <Link to="/list"><button id="second" type="submit">저장하기</button></Link>
             {/* <Link to="/list"><p id="second" onClick={sendData}>저장하기</p></Link> */}
           </div>
         </div>
