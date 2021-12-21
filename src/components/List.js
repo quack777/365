@@ -50,6 +50,7 @@ function List() {
   const [deleteIndex, setDelteIndex] = useState();
   const [answerNum, setAnswerNum] = useState();
   const [answerAllData, setAnswerAllData] = useState(["0"]);
+  const [public_answer, setPublic_answer] = useState(["N"]);
   const deleteModalContainer = useRef();
 
   let now = new Date();
@@ -61,7 +62,7 @@ function List() {
     location.state === undefined ? day : Number(location.state.id)
   );
 
-  console.log("location: ", location);
+  console.log("dataAnswer: ", dataAnswer);
   function showDelete(index) {
     setDeletes(true);
     setDelteIndex(index);
@@ -85,12 +86,13 @@ function List() {
         setDataYear(response.data.map((item) => item.answer_year));
         setDataAnswer(response.data.map((item) => item.answer));
         setAnswerNum(response.data.map((item) => item.answer_num));
+        setPublic_answer(response.data.map((item) => item.public_answer));
         setAnswerAllData(response.data);
       })
       .catch(function (error) {
         console.log(error);
       });
-  }, [setDataYear, setDataAnswer, setAnswerNum, dayNum]);
+  }, [setDataYear, setDataAnswer, setAnswerNum, setAnswerAllData, dayNum]);
 
   const getQuestion = useCallback(async () => {
     await axios
@@ -138,14 +140,37 @@ function List() {
       });
   }
 
-  function stateClose() {
-    setOpen(true);
-    setPublica("N");
+  function patchPublic(pa, index) {
+    axios({
+      url: `/settings/${answerAllData[index].answer_num}/1`,
+      method: "patch",
+      baseURL: "http://61.72.99.219:9130/",
+      data: {
+        public_answer: pa,
+      },
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
-  function stateOpen() {
+  function stateClose(index) {
+    setOpen(true);
+    setPublica("N");
+    public_answer[index] = "Y";
+    setPublic_answer(public_answer);
+    patchPublic(public_answer[index], index);
+  }
+
+  function stateOpen(index) {
     setOpen(false);
     setPublica("Y");
+    public_answer[index] = "N";
+    setPublic_answer(public_answer);
+    patchPublic(public_answer[index], index);
   }
 
   return (
@@ -160,6 +185,8 @@ function List() {
         <img src={monthBTN} alt="seeCalenderBtn" onClick={seeCalender} />
       </div>
 
+      {/* 이것은 당일에 해당하는 답변이 없을 떄만 보여주어야 합니다 */}
+
       <ListAnswerComponent
         showDelete={showDelete}
         dataAnswer={dataAnswer}
@@ -170,6 +197,7 @@ function List() {
         open={open}
         stateOpen={stateOpen}
         stateClose={stateClose}
+        public_answer={public_answer}
       />
 
       {deletes ? (
