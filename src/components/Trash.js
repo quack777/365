@@ -17,81 +17,9 @@ function Trash() {
   const [gotrashdata, setGotrashdata] = useState([]); // TrashAllDeleteModal에서 휴지통 전체 비우기 api에 보내줄 Data
   
   //페이징 처리
-  const [posts, setPosts] = useState();
+  const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(5);
-
-  // 가상 데이터
-  let setData = [
-    {
-      question_num: "344",
-      answer_date: "1209",
-      answer_year: "2022",
-      answer: "똥1",
-      answer_num: 1,
-    },
-    {
-      question_num: "344",
-      answer_date: "1209",
-      answer_year: "2021",
-      answer: "똥1",
-      answer_num: 2,
-    },
-    {
-      question_num: "344",
-      answer_date: "1209",
-      answer_year: "2020",
-      answer: "똥1",
-      answer_num: 3,
-    },
-    {
-      question_num: "343",
-      answer_date: "1208",
-      answer_year: "2022",
-      answer: "똥2",
-      answer_num: 4,
-    },
-    {
-      question_num: "343",
-      answer_date: "1208",
-      answer_year: "2021",
-      answer: "똥2",
-      answer_num: 5,
-    },
-    {
-      question_num: "343",
-      answer_date: "1208",
-      answer_year: "2020",
-      answer: "똥2",
-      answer_num: 6,
-    },
-    {
-      qustion_num: "342",
-      answer_date: "1207",
-      answer_year: "2022",
-      anwer:
-        "나는 엄마....... 왜냐하면 엄마는 크게 뭔가를 해주는 티를 내지는 않지만 매번 알게 모르게 날 챙겨주니까. 어릴땐 엄마 잔소리가 마냥 싫었는데, 이젠 그 잔소리에서 사랑이 뚝뚝 떨어진다는 사실을 나는 알아버렸으니까. 아빠 미안해 ^^ 조만간 부모님을 뵈러 본가에 가야겠다. 부모님이 좋아하는 떡이랑 과일 사들고 가야지.",
-      answer_num: 7,
-    },
-    {
-      qustion_num: "342",
-      answer_date: "1207",
-      answer_year: "2022",
-      anwer:
-        "나는 엄마....... 왜냐하면 엄마는 크게 뭔가를 해주는 티를 내지는 않지만 매번 알게 모르게 날 챙겨주니까. 어릴땐 엄마 잔소리가 마냥 싫었는데, 이젠 그 잔소리에서 사랑이 뚝뚝 떨어진다는 사실을 나는 알아버렸으니까. 아빠 미안해 ^^ 조만간 부모님을 뵈러 본가에 가야겠다. 부모님이 좋아하는 떡이랑 과일 사들고 가야지.",
-      answer_num: 7,
-    },
-    {
-      qustion_num: "342",
-      answer_date: "1207",
-      answer_year: "2022",
-      anwer:
-        "나는 엄마....... 왜냐하면 엄마는 크게 뭔가를 해주는 티를 내지는 않지만 매번 알게 모르게 날 챙겨주니까. 어릴땐 엄마 잔소리가 마냥 싫었는데, 이젠 그 잔소리에서 사랑이 뚝뚝 떨어진다는 사실을 나는 알아버렸으니까. 아빠 미안해 ^^ 조만간 부모님을 뵈러 본가에 가야겠다. 부모님이 좋아하는 떡이랑 과일 사들고 가야지.",
-      answer_num: 7,
-    },
-  ];
-
-  console.log(setData.length)
 
   useEffect(() => {
     // 첫 렌더링 때 usestate => member에 값 저장해서 Trash 컴포넌트 전체에서 member_num이 필요할 때 사용할 수 있게함
@@ -108,6 +36,7 @@ function Trash() {
       .then(function (response) {
         console.log(response.data);
         setTrashAlldata(response.data); // 휴지통 전체 데이터 trashAllData에 저장
+        setPosts(response.data)
       })
       .catch(function (error) {
         console.log(error);
@@ -175,7 +104,7 @@ function Trash() {
                   {data.answer_date && data.answer_date.substring(0, 2)}월{" "}
                   {data.answer_date && data.answer_date.substring(2, 4)}일
                 </p>
-                <p>{data.question_num}api호출</p> {/* 백에서 question데이터 담아주기로 함 => data.question */}
+                <p>{data.question}</p> {/* 백에서 question데이터 담아주기로 함 => data.question */}
               </div>
               <div className="answers">
                 <p>{data.answer_year}년의 나:</p>
@@ -218,8 +147,12 @@ function Trash() {
       :null}
       </section>
 
-      <Posts setData={currentPosts(setData)}></Posts>
-      <Pagination postsPerPage={postsPerPage} totalPosts={setData.length} paginate={setCurrentPage}></Pagination>
+      <p>밑에 테스트 테스트 페이징 테스트</p>
+      <Posts posts={currentPosts(posts)}></Posts>
+      {posts.length > 5 
+      ? 
+      <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={setCurrentPage}></Pagination>
+      : null}
       
       <div className="backColor"></div>
       <div id="backTrash"></div>
@@ -266,43 +199,45 @@ function DeleteModal(props) {
 }
 
 function TrashAllDeleteModal(props) {
-  let sendData = props.trashAllData;
+  props.setGotrashdata(props.trashAllData);
+  let sendData = props.gotrashdata.slice(); // 사본 만들기 deep copy
   console.log(sendData);
+
   function goTrash() {
-    let a = sendData.map(data => { // axios api 호출 할 때 넘길 데이터 정리
+    sendData.map(data => { // axios api 호출 할 때 넘길 데이터 정리
       delete data.answer
       delete data.answer_date
       delete data.answer_year
       delete data.delete_date
       delete data.public_answer
+      delete data.question
       return(
         data
       )
     })
-    props.setGotrashdata(a)
-    console.log(props.gotrashdata)
-    const setdata = props.gotrashdata;
+    console.log(sendData)
+    console.log(props.trashAllData);
+    console.log(props.gotrashdata);
     axios({
       url: "/trashes/all",
       method: "delete",
       baseURL: "http://61.72.99.219:9130",
-      data: {
-        setdata
-      }
+      data: sendData
     })
       .then((response) => {
         console.log(response);
-        props.setTrashAlldata(["answer"]); // trashAllData모두 삭제
-        props.setGotrashdata([]); 
+        props.setTrashAlldata([]); // trashAllData모두 삭제
         props.setOpenTrashAllDeleteModal(false);
       })
       .catch((error) => {
         console.log(error);
       });
   }
+
   function xDelete() {
     props.setOpenTrashAllDeleteModal(false);
   }
+
   return (
     <div className="deleteModal">
       <img onClick={xDelete} src={xxxxx}></img>
