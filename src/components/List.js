@@ -83,6 +83,7 @@ function List() {
           setAnswerNum(response.data.map((item) => item.answer_num));
           setPublic_answer(response.data.map((item) => item.public_answer));
           setAnswerAllData(response.data);
+          console.log(response.data);
         });
       })
       .catch(function (error) {
@@ -107,22 +108,23 @@ function List() {
   }, [getAns, getQuestion]);
 
   function goTrash() {
-    setDataAnswer(dataAnswer.filter((answer, index) => index !== deleteIndex)); //실제에서는 .then안에
-    const aN = answerNum[deleteIndex];
-
     axios({
-      url: `/answers/trashes/${aN}/1`,
+      url: `/answers/trashes`, // `/answers/trashes/${aN}/1`
       method: "patch",
       baseURL: "http://61.72.99.219:9130",
       data: {
-        answer_delete: "Y", //삭제이기때문에 항상 y로
+        answer_num: answerAllData[deleteIndex].answer_num,
+        answer_delete: "N",
         delete_date: new Date(+new Date() + 3240 * 10000)
-          .toISOString()
-          .split("T")[0], //오늘날짜로, date타입
+        .toISOString()
+        .split("T")[0], //오늘날짜로, date타입
+        member_num: 1,
+        question_num: answerAllData[deleteIndex].question_num
       },
     })
-      .then((response) => {
-        if (response.status === 200) alert("삭제 성공!");
+    .then((response) => {
+      if (response.status === 200) alert("삭제 성공!");
+        setAnswerAllData(answerAllData.filter((answer, index) => index !== deleteIndex)); //실제에서는 .then안에
         setDeletes(false);
         setAnswerNum(answerNum.filter((an, index) => index !== deleteIndex));
         getAns();
@@ -134,11 +136,13 @@ function List() {
 
   function patchPublic(pa, index) {
     axios({
-      url: `/settings/${answerAllData[index].answer_num}/1`,
+      url: `/settings`, // `/settings/${answerAllData[index].answer_num}/1`
       method: "patch",
       baseURL: "http://61.72.99.219:9130/",
       data: {
+        answer_num: answerAllData[index].answer_num,
         public_answer: pa,
+        member_num: 1
       },
     })
       .then((response) => {
@@ -153,6 +157,7 @@ function List() {
     setOpen(true);
     setPublica("N");
     public_answer[index] = "Y";
+    console.log(public_answer)
     setPublic_answer(public_answer);
     patchPublic(public_answer[index], index);
   }
@@ -161,6 +166,7 @@ function List() {
     setOpen(false);
     setPublica("Y");
     public_answer[index] = "N";
+    console.log(public_answer)
     setPublic_answer(public_answer);
     patchPublic(public_answer[index], index);
   }
