@@ -35,7 +35,7 @@ function Write() {
   const start = new Date(now.getFullYear(), 0, 0);
   const diff = now - start;
   const oneDay = 1000 * 60 * 60 * 24;
-  const day = Math.floor(diff / oneDay) + 1;
+  const day = Math.floor(diff / oneDay);
 
   function writeSubmit(e) {
     e.preventDefault();
@@ -46,13 +46,13 @@ function Write() {
     const answerDate = `${month}${date}`;
 
     axios
-      .post("http://61.72.99.219:9130/answers/new", {
+      .post("http://54.180.114.189:8080/365Project/answers/new", {
         answer_year: year,
         answer_date: answerDate,
         answer: content,
         public_answer: publica,
         question_num: questionN,
-        member_num: 1, //임시
+        member_num: member, //임시
       })
       .then(function (response) {
         if (response.status === 200) alert("글 등록 완료");
@@ -86,9 +86,7 @@ function Write() {
     setMember(Number(member_num));
 
     axios
-      .get(`/question/calendars/${day}`, {
-        baseURL: "http://61.72.99.219:9130",
-      })
+      .get(`http://54.180.114.189:8080/365Project/question/calendars/${day}`)
       .then(function (response) {
         setQuestion(response.data.question);
         setQuestionN(response.data.question_num);

@@ -1,18 +1,11 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Link, Route, useHistory, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import "../styles/List.css";
-import modify_normal from "../styles/images/modify_normal.png";
-import Line from "../styles/images/Line45.png";
 import monthBTN from "../styles/images/monthBTN.png";
-import delete_normal from "../styles/images/delete_normal.png";
 import xxxxx from "../styles/images/xxxxx.png";
-import Calendar from "react-calendar";
 import axios from "axios";
-import Modify from "./Modify";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { ko } from "date-fns/esm/locale";
 import Calender from "./util/Calender";
 import ListAnswerComponent from "./ListAnswerComponent";
 import { unstable_batchedUpdates } from "react-dom";
@@ -39,11 +32,11 @@ function List() {
   const [dataAnswer, setDataAnswer] = useState([
     "나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 200자 일 때 모습입니다",
   ]);
-  const [dataYear, setDataYear] = useState(["2020"]);
+  const [dataYear, setDataYear] = useState(["2022"]);
   const [member, setMember] = useState();
   const [deleteIndex, setDelteIndex] = useState();
   const [answerNum, setAnswerNum] = useState();
-  const [answerAllData, setAnswerAllData] = useState(["0"]);
+  const [answerAllData, setAnswerAllData] = useState([]);
   const [public_answer, setPublic_answer] = useState(["N"]);
   const deleteModalContainer = useRef();
 
@@ -51,11 +44,10 @@ function List() {
   let start = new Date(now.getFullYear(), 0, 0);
   let diff = now - start;
   let oneDay = 1000 * 60 * 60 * 24;
-  let day = Math.floor(diff / oneDay) + 1;
+  let day = Math.floor(diff / oneDay);
   const [dayNum] = useState(
     location.state === undefined ? day : Number(location.state.id)
   );
-
   function showDelete(index) {
     setDeletes(true);
     setDelteIndex(index);
@@ -73,7 +65,7 @@ function List() {
     setMember(Number(member_num));
 
     await axios
-      .get(`/answers/${dayNum}/1`)
+      .get(`http://54.180.114.189:8080/365Project/answers/${dayNum}/${member_num}`)
       .then(function (response) {
         unstable_batchedUpdates(() => {
           setDataYear(response.data.map((item) => item.answer_year));
@@ -90,7 +82,7 @@ function List() {
 
   const getQuestion = useCallback(async () => {
     await axios
-      .get(`/question/calendars/${dayNum}`)
+      .get(`http://54.180.114.189:8080/365Project/question/calendars/${dayNum}`)
       .then(function (response) {
         setQuestion(response.data.question);
       })
@@ -109,9 +101,9 @@ function List() {
     const aN = answerNum[deleteIndex];
 
     axios({
-      url: `/answers/trashes/${aN}/1`,
-      method: "patch",
-      baseURL: "http://61.72.99.219:9130",
+      url: `/answers/trashes/${aN}/${member}`,
+      method: "PATCH",
+      baseURL: "http://54.180.114.189:8080/365Project/",
       data: {
         answer_delete: "Y", //삭제이기때문에 항상 y로
         delete_date: new Date(+new Date() + 3240 * 10000)
@@ -132,9 +124,9 @@ function List() {
 
   function patchPublic(pa, index) {
     axios({
-      url: `/settings/${answerAllData[index].answer_num}/1`,
+      url: `/settings/${answerAllData[index].answer_num}/${member}`,
       method: "patch",
-      baseURL: "http://61.72.99.219:9130/",
+      baseURL: "http://54.180.114.189:8080/365Project/",
       data: {
         public_answer: pa,
       },

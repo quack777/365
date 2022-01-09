@@ -158,4 +158,11 @@ dist
 .svelte-kit
 
 # End of https://www.toptal.com/developers/gitignore/api/node
+<<<<<<< HEAD
 >>>>>>> 79815462ce8030b6d4a0231ddceae70c6603fcb4
+=======
+
+
+# Build/
+[bB]uild/
+>>>>>>> 371c449e5592a65c3fa523ccfd026c0ab8a4dfc8

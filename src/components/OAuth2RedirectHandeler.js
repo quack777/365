@@ -15,12 +15,13 @@ function OAuth2RedirectHandler() {
     if (loading) {
       setTimeout(() => {
         history.push("/365");
-      }, 2000);
+      }, 1000);
     }
 
     axios({
       method: "GET",
-      url: `http://61.72.99.219:9130/login/oauth_kakao?code=${code}`,
+      url: `/login/oauth_kakao?code=${code}`,
+      baseURL: "http://54.180.114.189:8080/365Project",
     })
       .then((res) => {
         const { id, nickname, token } = res.data;

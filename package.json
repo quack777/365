@@ -1,5 +1,5 @@
 {
-  "name": "365",
+  "name": "365front",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -9,6 +9,7 @@
     "axios": "^0.24.0",
     "dotenv": "^8.2.0",
     "gh-pages": "^3.2.3",
+    "http-proxy-middleware": "^0.19.1",
     "node-sass": "^4.14.1",
     "patch-package": "^6.4.7",
     "react": "^17.0.2",
@@ -26,7 +27,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "deploy": "gh-pages -d build",
+    "deploy": "aws s3 sync ./build s3://front365 --profile=project365",
     "predeploy": "npm run build"
   },
   "eslintConfig": {
@@ -47,6 +48,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://61.72.99.219:9130",
-  "homepage": "https://quack777.github.io/365/"
+  "proxy": "http://54.180.114.189:8080/365Project/"
 }

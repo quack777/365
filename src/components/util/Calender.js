@@ -1,7 +1,7 @@
 import React from "react";
 import DatePicker from "react-datepicker";
 import xxxxx from "../../styles/images/xxxxx.png";
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 export default function Calender(props) {
@@ -23,9 +23,7 @@ export default function Calender(props) {
 
   function getQuestion(day) {
     axios
-      .get(`/question/calendars/${day}`, {
-        baseURL: "http://61.72.99.219:9130",
-      })
+      .get(`http://54.180.114.189:8080/365Project/question/calendars/${day}`)
       .then(function (response) {
         props.setQuestion(response.data.question);
       })
@@ -36,7 +34,7 @@ export default function Calender(props) {
 
   function getAnswer(day) {
     axios
-      .get(`/answers/${day}/1`, { baseURL: "http://61.72.99.219:9130" })
+      .get(`http://54.180.114.189:8080/365Project/answers/${day}/1`)
       .then(function (response) {
         const answer = response.data.map((item) => item.answer);
         const answer_year = response.data.map((item) => item.answer_year);
