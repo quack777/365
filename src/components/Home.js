@@ -17,7 +17,7 @@ function Home() {
 
   const [answer8, setAnswer8] = useState([]);
   const [ranname, setRanname] = useState([]);
-  const [question, setQuestion] = useState("나의 삶의 목적은 무엇인가요?");
+  const [question, setQuestion] = useState();
   // const [num, setNum] = useState(0);
   var now = new Date();
   var start = new Date(now.getFullYear(), 0, 0);
@@ -49,10 +49,10 @@ function Home() {
 
   function getRandomNicknames() {
     axios({
-      url: "/random",
+      url: "http://13.125.34.8:8080/365Project/random",
       method: "get",
       //withCredentials: true,
-      baseURL: "http://54.180.114.189:8080/365Project/",
+      // baseURL: "",
     })
       .then(function (response) {
         console.log(response);
@@ -64,24 +64,25 @@ function Home() {
   }
   const getRandomAnswers = useCallback(() => {
     axios({
-      url: `/random/${day}`, // /random/{question_num}
+      url: `http://13.125.34.8:8080/365Project/random/${day}`, // /random/{question_num}
       method: "get",
       //withCredentials: true,
-      baseURL: "http://54.180.114.189:8080/365Project/",
+      // baseURL: "/",
     })
       .then(function (response) {
-        if (response.status === 200) {
-          // 실제 데이터가 들어올 경우
-          // setAnswer8(Array.from({ length: 8 }, (v, i) => response.data[i]));
+        setAnswerData(response.data); // 답변 8게로 맞추기
+        // if (response.status === 200) {
+        //   // 실제 데이터가 들어올 경우
+        //   // setAnswer8(Array.from({ length: 8 }, (v, i) => response.data[i]));
 
-          // =======DUMMY=======
-          setAnswer8(
-            Array.from(
-              { length: 8 },
-              (v, i) => "당신의 답변을 다른 사람들에게 공유해주세요"
-            )
-          );
-        }
+        //   // =======DUMMY=======
+        //   setAnswer8(
+        //     Array.from(
+        //       { length: 8 },
+        //       (v, i) => "당신의 답변을 다른 사람들에게 공유해주세요"
+        //     )
+        //   );
+        // }
 
         // console.log("arr: ", arr);
         // setAnswer8(arr);
@@ -91,21 +92,12 @@ function Home() {
       });
   }, [day]);
 
-  // function setAnswerData(data) {
-  //   const dataArray = data;
-  //   const pushCout = 8 - data.length;
-  //   for (let index = 0; index < pushCout; index++) {
-  //     dataArray.push("당신의 답변을 다른 사람들에게 공유해주세요");
-  //   }
-  //   setAnswer8(dataArray);
-  // }
-
   const getQuestion = useCallback(() => {
     axios({
       url: `/question/${day}`,
       method: "get",
       //withCredentials: true,
-      baseURL: "http://54.180.114.189:8080/365Project/",
+      baseURL: "http://13.125.34.8:8080/365Project/",
     })
       .then(function (response) {
         console.log(response.data);
@@ -121,6 +113,15 @@ function Home() {
     getRandomAnswers();
     getRandomNicknames();
   }, [getQuestion, getRandomAnswers]);
+
+  function setAnswerData(data) {
+    const dataArray = data;
+    const pushCout = 8 - data.length;
+    for (let index = 0; index < pushCout; index++) {
+      dataArray.push("당신의 답변을 다른 사람들에게 공유해주세요");
+    }
+    setAnswer8(dataArray);
+  }
 
   return (
     <div className="Home">

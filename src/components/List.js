@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useRef, useEffect, useCallback } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import "../styles/List.css";
 import monthBTN from "../styles/images/monthBTN.png";
 import xxxxx from "../styles/images/xxxxx.png";
@@ -12,6 +12,11 @@ import { unstable_batchedUpdates } from "react-dom";
 
 function List() {
   const location = useLocation();
+  const history = useHistory();
+
+  // 다이렉트로 url 접근 시 뒤로가기
+  // const getId = sessionStorage.getItem("id");
+  // if (getId === null) history.goBack(-1);
 
   const [month, setMonth] = useState(
     location.state === undefined
@@ -26,18 +31,17 @@ function List() {
 
   const [deletes, setDeletes] = useState(false);
   const [calender, setCalender] = useState(false);
-  const [question, setQuestion] = useState("나의 삶의 목적은 무엇인가요?");
+  const [question, setQuestion] = useState();
   const [open, setOpen] = useState(false);
   const [publica, setPublica] = useState("N");
-  const [dataAnswer, setDataAnswer] = useState([
-    "나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 나의 답변은 이렇다 나는 이렇게 생각하고 저렇게 생각한다 나는 이러쿵 저러쿵 200자 일 때 모습입니다",
-  ]);
+  const [dataAnswer, setDataAnswer] = useState([]);
   const [dataYear, setDataYear] = useState(["2022"]);
   const [member, setMember] = useState();
   const [deleteIndex, setDelteIndex] = useState();
   const [answerNum, setAnswerNum] = useState();
   const [answerAllData, setAnswerAllData] = useState([]);
   const [public_answer, setPublic_answer] = useState(["N"]);
+  const [questionNum, setQuestionNum] = useState(0);
   const deleteModalContainer = useRef();
 
   let now = new Date();
@@ -45,9 +49,11 @@ function List() {
   let diff = now - start;
   let oneDay = 1000 * 60 * 60 * 24;
   let day = Math.floor(diff / oneDay);
-  const [dayNum] = useState(
-    location.state === undefined ? day : Number(location.state.id)
-  );
+
+  // const [dayNum] = useState(
+  //   location.state === undefined ? day : Number(location.state.id)
+  // );
+
   function showDelete(index) {
     setDeletes(true);
     setDelteIndex(index);
@@ -61,11 +67,11 @@ function List() {
     setCalender(true);
   }
   const getAns = useCallback(async () => {
-    const member_num = localStorage.getItem("member_num");
+    const member_num = sessionStorage.getItem("member_num");
     setMember(Number(member_num));
 
     await axios
-      .get(`http://54.180.114.189:8080/365Project/answers/${dayNum}/${member_num}`)
+      .get(`http://13.125.34.8:8080/365Project/answers/${day}/${member_num}`)
       .then(function (response) {
         unstable_batchedUpdates(() => {
           setDataYear(response.data.map((item) => item.answer_year));
@@ -78,18 +84,19 @@ function List() {
       .catch(function (error) {
         console.log(error);
       });
-  }, [dayNum]);
+  }, [day]);
 
   const getQuestion = useCallback(async () => {
     await axios
-      .get(`http://54.180.114.189:8080/365Project/question/calendars/${dayNum}`)
+      .get(`http://13.125.34.8:8080/365Project/question/calendars/${day}`)
       .then(function (response) {
         setQuestion(response.data.question);
+        setQuestionNum(response.data.question_num);
       })
       .catch(function (error) {
         console.log(error);
       });
-  }, [setQuestion, dayNum]);
+  }, [setQuestion, day]);
 
   useEffect(() => {
     getQuestion();
@@ -98,23 +105,25 @@ function List() {
 
   function goTrash() {
     setDataAnswer(dataAnswer.filter((answer, index) => index !== deleteIndex)); //실제에서는 .then안에
-    const aN = answerNum[deleteIndex];
 
     axios({
-      url: `/answers/trashes/${aN}/${member}`,
+      url: `/answers/trashes`,
       method: "PATCH",
-      baseURL: "http://54.180.114.189:8080/365Project/",
+      baseURL: "http://13.125.34.8:8080/365Project/",
       data: {
-        answer_delete: "Y", //삭제이기때문에 항상 y로
+        answer_num: answerAllData[deleteIndex].answer_num,
+        answer_delete: answerAllData[deleteIndex].answer_delete, //삭제이기때문에 항상 y로
         delete_date: new Date(+new Date() + 3240 * 10000)
           .toISOString()
           .split("T")[0], //오늘날짜로, date타입
+        member_num: member,
+        question_num: answerAllData[deleteIndex].question_num,
       },
     })
-      .then((response) => {
+      .then((response, request) => {
         if (response.status === 200) alert("삭제 성공!");
         setDeletes(false);
-        setAnswerNum(answerNum.filter((an, index) => index !== deleteIndex));
+        setAnswerAllData(answerAllData.filter((data, index) => index !== deleteIndex))
         getAns();
       })
       .catch((error) => {
@@ -123,16 +132,20 @@ function List() {
   }
 
   function patchPublic(pa, index) {
+    const aN = answerAllData[index].answer_num;
     axios({
-      url: `/settings/${answerAllData[index].answer_num}/${member}`,
+      url: `/settings`,
       method: "patch",
-      baseURL: "http://54.180.114.189:8080/365Project/",
+      baseURL: "http://13.125.34.8:8080/365Project/",
       data: {
         public_answer: pa,
+        answer_num: aN,
+        member_num: member,
       },
     })
       .then((response) => {
         console.log(response);
+        pa = "Y" ? alert("답변이 비공개 됐습니다") : alert("답변이 전체공개 됐습니다")
       })
       .catch((error) => {
         console.log(error);
@@ -164,7 +177,12 @@ function List() {
           </p>
           <p>{question}</p>
         </div>
-        <img src={monthBTN} alt="seeCalenderBtn" onClick={seeCalender} />
+        <img
+          src={monthBTN}
+          alt="seeCalenderBtn"
+          style={{ cursor: "pointer" }}
+          onClick={seeCalender}
+        />
       </div>
 
       {/* 이것은 당일에 해당하는 답변이 없을 떄만 보여주어야 합니다 */}
@@ -181,6 +199,8 @@ function List() {
         stateClose={stateClose}
         public_answer={public_answer}
         day={day}
+        date={date}
+        month={month}
       />
 
       {deletes ? (
