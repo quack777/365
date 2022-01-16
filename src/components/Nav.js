@@ -2,15 +2,18 @@ import React, { useRef, useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "../styles/Nav.css";
 
-function Nav() {
+function Nav(props) {
   const location = useLocation();
+
   location.isLogged = (sessionStorage.getItem("nickname") && true) || false;
   location.onClicked = false;
+
+  const NavCssflag = location.pathname.slice(1);
 
   const handleClick = () => (location.onClicked = true);
 
   return (
-    <div className="Nav" id="Nav">
+    <div className={props.isMobile ? "Nav_mobile" : `Nav ${NavCssflag}`}>
       <Link to="/365">
         <p id="logo">365</p>
       </Link>
@@ -24,7 +27,7 @@ function Nav() {
           to={(location) => {
             if (!location.isLogged && location.onClicked) {
               alert("로그인이 필요합니다!");
-              return { pathname: "/365" };
+              return { pathname: "/login" };
             } else {
               return { pathname: "/list" };
             }
@@ -39,7 +42,7 @@ function Nav() {
           to={(location) => {
             if (!location.isLogged && location.onClicked) {
               alert("로그인이 필요합니다!");
-              return { pathname: "/365" };
+              return { pathname: "/login" };
             } else {
               return { pathname: "/trash" };
             }

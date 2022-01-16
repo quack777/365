@@ -11,17 +11,17 @@ function WriteUpdate() {
   const { id } = useParams();
   const location = useLocation();
   const history = useHistory();
-  const targetMonth = Math.floor(Number(location.state.data.answer_date) / 100);
-  const targetDate = Number(location.state.data.answer_date) % 100;
-  const targetYear = location.state.data.answer_year;
+  const targetMonth = Number(location?.state?.data?.answer_date.slice(0, 2));
+  const targetDate = Number(location?.state?.data?.answer_date) % 100;
+  const targetYear = location?.state?.data?.answer_year;
   const [initialValue, setInitialValue] = useState(
-    location?.state?.data.answer
+    location?.state?.data?.answer
   );
 
   const [question] = useState(location.state.question);
   const [count, setCount] = useState(0);
   const [open, setOpen] = useState(false);
-  const [publica, setPublica] = useState(location.state.data.public_answer);
+  const [publica, setPublica] = useState(location?.state?.data?.public_answer);
 
   function writeSubmit(e) {
     e.preventDefault();
@@ -29,7 +29,7 @@ function WriteUpdate() {
       url: `/answers/pages`, // 임시 member => 1
       // /answers/pages/{answer_num}/{member_num}
       method: "patch",
-      baseURL: "http://13.125.34.8:8080/365Project/",
+      baseURL: process.env.REACT_APP_SERVER_IP,
       data: {
         answer_num: location.state.data.answer_num,
         answer: initialValue,

@@ -46,7 +46,7 @@ function Write() {
     const answerDate = `${month}${date}`;
 
     axios
-      .post("http://13.125.34.8:8080/365Project/answers/new", {
+      .post(`${process.env.REACT_APP_SERVER_IP}/answers/new`, {
         answer_year: year,
         answer_date: answerDate,
         answer: content,
@@ -86,7 +86,7 @@ function Write() {
     setMember(Number(member_num));
 
     axios
-      .get(`http://13.125.34.8:8080/365Project/question/calendars/${day}`)
+      .get(`${process.env.REACT_APP_SERVER_IP}/question/calendars/${day}`)
       .then(function (response) {
         setQuestion(response.data.question);
         setQuestionN(response.data.question_num);
@@ -130,9 +130,9 @@ function Write() {
             )}
           </div>
           <div className="twoBtn">
-            <Link to="/365">
+            <button style={{borderStyle: "none", backgroundColor: "transparent"}} onClick={() => history.goBack()}>
               <p id="first">작성취소</p>
-            </Link>
+            </button>
             <button id="second" type="submit">
               저장하기
             </button>

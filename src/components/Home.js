@@ -9,7 +9,7 @@ import main from "../styles/images/mainpage.png";
 import "../styles/Home.css";
 import { Link, useLocation } from "react-router-dom";
 
-function Home() {
+function Home(props) {
   const NewDate = new Date();
   const month = NewDate.getMonth() + 1;
   const date = NewDate.getDate();
@@ -18,18 +18,19 @@ function Home() {
   const [answer8, setAnswer8] = useState([]);
   const [ranname, setRanname] = useState([]);
   const [question, setQuestion] = useState();
+  const [todayMyA, setTodayMyA] = useState([]);
   // const [num, setNum] = useState(0);
   var now = new Date();
   var start = new Date(now.getFullYear(), 0, 0);
   var diff = now - start;
   var oneDay = 1000 * 60 * 60 * 24;
   var day = Math.floor(diff / oneDay);
-
+  const member_num = sessionStorage.getItem("member_num");
   let num = 0;
   const handleClick = () => (location.onClicked = true);
 
   const answersBox = useRef();
-  function leftMove(a) {
+  function rightMove(a) {
     console.log(answersBox.current.style.transform);
     if (num >= -300) {
       num = num - 30;
@@ -39,7 +40,7 @@ function Home() {
     }
   }
   //데이터 세팅
-  function rightMove() {
+  function leftMove() {
     if (num <= 30) {
       num = num + 30;
       answersBox.current.style.transform = `translateX(${num}%)`;
@@ -49,7 +50,7 @@ function Home() {
 
   function getRandomNicknames() {
     axios({
-      url: "http://13.125.34.8:8080/365Project/random",
+      url: `${process.env.REACT_APP_SERVER_IP}/random`,
       method: "get",
       //withCredentials: true,
       // baseURL: "",
@@ -64,7 +65,7 @@ function Home() {
   }
   const getRandomAnswers = useCallback(() => {
     axios({
-      url: `http://13.125.34.8:8080/365Project/random/${day}`, // /random/{question_num}
+      url: `${process.env.REACT_APP_SERVER_IP}/random/${day}`, // /random/{question_num}
       method: "get",
       //withCredentials: true,
       // baseURL: "/",
@@ -97,7 +98,7 @@ function Home() {
       url: `/question/${day}`,
       method: "get",
       //withCredentials: true,
-      baseURL: "http://13.125.34.8:8080/365Project/",
+      baseURL: process.env.REACT_APP_SERVER_IP,
     })
       .then(function (response) {
         console.log(response.data);
@@ -108,10 +109,25 @@ function Home() {
       });
   }, [day]);
 
+  const getTodayMyAnswer = () => {
+    axios
+      .get(`${process.env.REACT_APP_SERVER_IP}/answers/${day}/${member_num}`)
+      .then(function (response) {
+        console.log(response.data);
+        if (response.data.length > 0) {
+          setTodayMyA(response.data);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
     getQuestion();
     getRandomAnswers();
     getRandomNicknames();
+    getTodayMyAnswer();
   }, [getQuestion, getRandomAnswers]);
 
   function setAnswerData(data) {
@@ -125,14 +141,18 @@ function Home() {
 
   return (
     <div className="Home">
-      <div className="questions">
+      <div className={props.isMobile ? "questions_mobile" : "questions"}>
         <p>
           {month}월 {date}일
         </p>
         <div>
           <img src={VectorLeft} alt="vectorLeft"></img>
           <p>{question}</p>
-          <img src={VectorRight} alt="vectorRight"></img>
+          <img
+            src={VectorRight}
+            alt="vectorRight"
+            className="vectorRight"
+          ></img>
         </div>
       </div>
       <div className="overflow">
@@ -159,9 +179,35 @@ function Home() {
         to={(location) => {
           if (!location.isLogged && location.onClicked) {
             alert("로그인이 필요합니다!");
-            return { pathname: "/365" };
+            return { pathname: "/login" };
           } else {
-            return { pathname: "/write" };
+            if (todayMyA.length > 0 && location.onClicked) {
+              if (
+                window.confirm(
+                  "오늘 답변이 이미 존재합니다! 수정하시겠습니까 ?"
+                )
+              ) {
+                return {
+                  pathname: `/write/${day}`,
+                  state: {
+                    question: question,
+                    data: {
+                      answer: todayMyA[0].answer,
+                      public_answer: todayMyA[0].public_answer,
+                      answer_date: todayMyA[0].answer_date,
+                      answer_year: todayMyA[0].answer_year,
+                      member_num: member_num,
+                      answer_num: todayMyA[0].answer_num,
+                    },
+                  },
+                };
+              } else {
+                return { pathname: `/365` };
+              }
+            } else {
+              return { pathname: "/write" };
+            }
+            // return { pathname: "/write" };
           }
         }}
         onClick={handleClick}
@@ -171,8 +217,8 @@ function Home() {
           <img src={Vector} alt="vector"></img>
         </button>
       </Link>
-      <div id="bottom">
-        <div>
+      <div id={props.isMobile ? "bottom_mobile" : "bottom"}>
+        <div className={props.isMobile ? "bottom_textBox_mobile" : "bottom"}>
           <p>365개의 질문,</p>
           <p>그리고 나와 나를 연결할 기록들.</p>
           <p>
@@ -181,7 +227,11 @@ function Home() {
             찬찬히 나를 만나봐요.
           </p>
         </div>
-        <img src={main}></img>
+        <img
+          className={props.isMobile ? "bgImg_mobile" : "bgImg"}
+          alt="bgImg"
+          src={main}
+        ></img>
       </div>
       <div className="backColor"></div>
     </div>

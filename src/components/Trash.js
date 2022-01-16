@@ -31,7 +31,7 @@ function Trash() {
     axios({
       url: `/trashes/${member_num}`, //임시 1, `/trashes/${member_num}`
       method: "get",
-      baseURL: "http://13.125.34.8:8080/365Project/",
+      baseURL: process.env.REACT_APP_SERVER_IP,
     })
       .then(function (response) {
         console.log(response.data);
@@ -50,7 +50,7 @@ function Trash() {
   function oneRemove(answer_num, answer_delete) {
     setOpenDeleteModal(true); // 모달 창 열어주기
     setClickAN([answer_num, answer_delete]); // 모달 창에서 answer_num사용할 수 있게 clickAN에 값 저장\
-    console.log(clickAN)
+    console.log(clickAN);
   }
 
   function revert(answer_num, answer_delete, delete_date, question_num) {
@@ -60,7 +60,7 @@ function Trash() {
     axios({
       url: `/trashes/settings/${answer_num}/${member}`, // `/trashes/settings/${answer_num}/${member_num}`
       method: "patch",
-      baseURL: "http://13.125.34.8:8080/365Project/",
+      baseURL: process.env.REACT_APP_SERVER_IP,
       data: {
         answer_delete: answer_delete, // N or Y
         delete_date: delete_date, //date타입
@@ -133,7 +133,6 @@ function Trash() {
       ) : null}
 
       <div className="backColor"></div>
-      <div id="backTrash"></div>
     </div>
   );
 }
@@ -147,7 +146,7 @@ function DeleteModal(props) {
       baseURL: "http://13.125.34.8:8080/365Project/",
       data: {
         member_num: props.member, //props.member
-        answer_delete: props.clickAN[1]
+        answer_delete: props.clickAN[1],
       },
     })
       .then(function (response) {

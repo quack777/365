@@ -1,3 +1,4 @@
+
 .Nav {
   height: 143px;
   display: flex;
@@ -7,6 +8,8 @@
   padding-right: 119px;
   box-sizing: border-box;
   width: 100%;
+  min-width: 375px;
+  background-color: #f9f8f9;
 }
 
 #Nav {
@@ -36,10 +39,10 @@
   color: #084861;
 }
 
-.Nav > #nav_btn {
+.Nav > #nav_btn, .Nav_mobile> #nav_btn {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-around;
   height: 23px;
   width: 458px;
 
@@ -54,7 +57,7 @@
   color: #084861;
 }
 
-.Nav > #nav_btn > a {
+.Nav > #nav_btn > a, .Nav_mobile > #nav_btn > a {
   font-family: Spoqa Han Sans Neo;
   font-style: normal;
   font-weight: 500;
@@ -71,7 +74,7 @@
   color: #084861;
 }
 
-.Nav > #nav_btn > a:active {
+.Nav > #nav_btn > a:active ,.Nav_mobile > #nav_btn > a:active  {
   font-family: Spoqa Han Sans Neo;
   font-style: normal;
   font-weight: bold;
@@ -106,3 +109,35 @@
 
   border-bottom: 2px solid #084861;
 }
+
+.trash, .introduce, .list {
+  background-color: white;
+}
+
+/* 
+.Nav_mobile {
+  height: 143px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding:30px;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 375px;
+}
+
+.Nav_mobile a {
+  text-decoration: none;
+}
+
+.Nav_mobile #logo {
+  font-family: Volte;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 26.25px;
+  line-height: 32px;
+
+  text-align: center;
+  letter-spacing: 0.1em;
+  color: #084861;
+} */

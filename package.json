@@ -17,6 +17,7 @@
     "react-datepicker": "^4.5.0",
     "react-dom": "^17.0.2",
     "react-kakao-login": "^2.1.0",
+    "react-responsive": "*",
     "react-responsive-carousel": "^3.2.22",
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
@@ -29,7 +30,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "deploy": "aws s3 sync ./build s3://front365 --profile=project365",
-    "predeploy": "npm run build"
+    "predeploy": "npm run build",
+    "postInstall" : "patch-package"
   },
   "eslintConfig": {
     "extends": [
@@ -49,5 +51,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://13.125.34.8:8080/365Project/"
+  "proxy": "http://13.209.115.209:8080/365Project/"
 }
