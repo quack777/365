@@ -19,6 +19,7 @@ function Home(props) {
   const [ranname, setRanname] = useState([]);
   const [question, setQuestion] = useState();
   const [todayMyA, setTodayMyA] = useState([]);
+  const [todayMyTrashA, setTodayMYTrashA] = useState(false);
   // const [num, setNum] = useState(0);
   var now = new Date();
   var start = new Date(now.getFullYear(), 0, 0);
@@ -30,21 +31,21 @@ function Home(props) {
   const handleClick = () => (location.onClicked = true);
 
   const answersBox = useRef();
+
   function rightMove(a) {
-    console.log(answersBox.current.style.transform);
-    if (num >= -300) {
+    if (num > -210) {
       num = num - 30;
       answersBox.current.style.transform = `translateX(${num}%)`;
-      console.log(answersBox.current.style.transform);
       console.log(num);
     }
   }
   //데이터 세팅
   function leftMove() {
-    if (num <= 30) {
+    if (num < 0) {
       num = num + 30;
       answersBox.current.style.transform = `translateX(${num}%)`;
-      console.log(answersBox.current.style.transform);
+      console.log(num);
+      console.log(answersBox.current.style.transform)
     }
   }
 
@@ -123,11 +124,31 @@ function Home(props) {
       });
   };
 
+  const getTodyaMyTrashAnswer = () => {
+    axios
+      .get(`${process.env.REACT_APP_SERVER_IP}/trashes/${member_num}`)
+      .then(function (response) {
+        console.log(response.data);
+        const year = new Date().getFullYear()
+        response.data.filter(data => {
+          if (data.question_num === day) {
+            if (data.answer_year == year) {
+              setTodayMYTrashA(true);
+            }
+          }
+        })
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    };
+
   useEffect(() => {
     getQuestion();
     getRandomAnswers();
     getRandomNicknames();
     getTodayMyAnswer();
+    getTodyaMyTrashAnswer();
   }, [getQuestion, getRandomAnswers]);
 
   function setAnswerData(data) {
@@ -204,10 +225,12 @@ function Home(props) {
               } else {
                 return { pathname: `/365` };
               }
-            } else {
+            } else if (todayMyTrashA && location.onClicked) {
+              alert("휴지통에 오늘 답변이 존재합니다");
+            } 
+            else {
               return { pathname: "/write" };
             }
-            // return { pathname: "/write" };
           }
         }}
         onClick={handleClick}
