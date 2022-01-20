@@ -1,14 +1,15 @@
 import React from "react";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useLocation, useHistory } from "react-router-dom";
-import "../styles/List.css";
-import monthBTN from "../styles/images/monthBTN.png";
-import xxxxx from "../styles/images/xxxxx.png";
+import "../../styles/List.css";
+import monthBTN from "../../styles/images/monthBTN.png";
+import xxxxx from "../../styles/images/xxxxx.png";
 import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
-import Calender from "./util/Calender";
+import Calender from "../util/Calender";
 import ListAnswerComponent from "./ListAnswerComponent";
 import { unstable_batchedUpdates } from "react-dom";
+import { Alert } from "../util/alert_modal/alert";
 
 function List() {
   const location = useLocation();
@@ -32,6 +33,8 @@ function List() {
   const [public_answer, setPublic_answer] = useState(["N"]);
   const [questionNum, setQuestionNum] = useState(0);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  const [isDelete, setIsDelete] = useState(false);
+  const [questionData, setQuestionData] = useState([]);
 
   const deleteModalContainer = useRef();
 
@@ -40,6 +43,7 @@ function List() {
   let diff = now - start;
   let oneDay = 1000 * 60 * 60 * 24;
   let day = Math.floor(diff / oneDay);
+  const member_num = sessionStorage.getItem("member_num");
 
   const [answerDate, setAnswerDate] = useState(
     location.state === undefined ? day : Number(location.state.id)
@@ -67,43 +71,39 @@ function List() {
   function seeCalender() {
     setCalender(true);
   }
-  const getAns = useCallback(async () => {
-    const member_num = sessionStorage.getItem("member_num");
-    setMember(Number(member_num));
+  const getQnA = useCallback(async () => {
+    try {
+      setMember(Number(member_num));
+      const answers = await axios.get(
+        `${process.env.REACT_APP_SERVER_IP}/answers/${date}/${member_num}`
+      );
+      setAnswerAllData(answers.data);
+      const questions = await axios.get(
+        `${process.env.REACT_APP_SERVER_IP}/question/calendars/${date}`
+      );
+      setQuestionData(questions.data);
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  }, [member_num, date]);
 
-    await axios
-      .get(`${process.env.REACT_APP_SERVER_IP}/answers/${date}/${member_num}`)
-      .then(function (response) {
-        unstable_batchedUpdates(() => {
-          setDataYear(response.data.map((item) => item.answer_year));
-          setAnswerDate(response.data.map((item) => item.answer_date));
-          setDataAnswer(response.data.map((item) => item.answer));
-          setAnswerNum(response.data.map((item) => item.answer_num));
-          setPublic_answer(response.data.map((item) => item.public_answer));
-          setAnswerAllData(response.data);
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, [date]);
-
-  const getQuestion = useCallback(async () => {
-    await axios
-      .get(`${process.env.REACT_APP_SERVER_IP}/question/calendars/${date}`)
-      .then(function (response) {
-        setQuestion(response.data.question);
-        setQuestionNum(response.data.question_num);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, [setQuestion, date]);
+  const filterAnswer = (answerAllData, questionData) => {
+    setDataYear(answerAllData.map((item) => item.answer_year));
+    setAnswerDate(answerAllData.map((item) => item.answer_date));
+    setDataAnswer(answerAllData.map((item) => item.answer));
+    setAnswerNum(answerAllData.map((item) => item.answer_num));
+    setPublic_answer(answerAllData.map((item) => item.public_answer));
+    setQuestion(questionData.question);
+    setQuestionNum(questionData.question_num);
+  };
 
   useEffect(() => {
-    getQuestion();
-    getAns();
-  }, [getAns, getQuestion]);
+    getQnA();
+  }, [date, getQnA]);
+
+  useEffect(() => {
+    filterAnswer(answerAllData, questionData);
+  }, [answerAllData, questionData]);
 
   function goTrash() {
     setDataAnswer(dataAnswer.filter((answer, index) => index !== deleteIndex)); //실제에서는 .then안에
@@ -123,12 +123,14 @@ function List() {
       },
     })
       .then((response, request) => {
-        if (response.status === 200) // alert("삭제 성공!");
+        if (response.status === 200)
+          // alert("삭제 성공!");
+          setIsDelete(true);
         setDeletes(false);
         setAnswerAllData(
           answerAllData.filter((data, index) => index !== deleteIndex)
         );
-        getAns();
+        getQnA();
       })
       .catch((error) => {
         console.log(error);
@@ -208,6 +210,7 @@ function List() {
         date={date}
         month={month}
         selectedYear={selectedYear}
+        member_num={member_num}
       />
 
       {deletes ? (
@@ -221,7 +224,9 @@ function List() {
           </section>
         </div>
       ) : null}
-
+      {isDelete ? (
+        <Alert goAway={"/list"} isClose={setIsDelete} content={"삭제"}></Alert>
+      ) : null}
       {calender ? (
         <Calender
           setDataYear={setDataYear}

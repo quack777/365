@@ -25,6 +25,7 @@
 
 .Nav a {
   text-decoration: none;
+  cursor: pointer;
 }
 
 .Nav #logo {
@@ -110,7 +111,7 @@
   border-bottom: 2px solid #084861;
 }
 
-.trash, .introduce, .list {
+.trash, .introduce, .list, .login, .logoutRoute, .oauth_kakao{
   background-color: white;
 }
 

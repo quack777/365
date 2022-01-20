@@ -1,12 +1,14 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import modify_normal from "../styles/images/modify_normal.png";
-import Line from "../styles/images/Line45.png";
-import delete_normal from "../styles/images/delete_normal.png";
-import toggle_unselected from "../styles/images/list_private.png";
-import toggle_selected from "../styles/images/list_public.png";
-import girl from "../styles/images/Mask Group.png";
-import "../styles/List.css";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation, useHistory } from "react-router-dom";
+import modify_normal from "../../styles/images/modify_normal.png";
+import Line from "../../styles/images/Line45.png";
+import delete_normal from "../../styles/images/delete_normal.png";
+import toggle_unselected from "../../styles/images/list_private.png";
+import toggle_selected from "../../styles/images/list_public.png";
+import girl from "../../styles/images/Mask Group.png";
+import "../../styles/List.css";
+import axios from "axios";
+import AlertTrash from "../util/alert_modal/AlertTrash";
 
 export default function List_answer({
   question,
@@ -19,6 +21,7 @@ export default function List_answer({
   month,
   dataYear,
   selectedYear,
+  member_num,
 }) {
   const dt = new Date();
   var nowDate =
@@ -26,11 +29,58 @@ export default function List_answer({
     (dt.getMonth() + 1).toString().padStart(2, "0") +
     dt.getDate().toString().padStart(2, "0");
 
+  const history = useHistory();
   const monthToString = month + "";
   const targetDate =
     selectedYear.toString() + monthToString.padStart(2, "0") + date;
 
+  const [answersFromTrash, setAnswersFromTrash] = useState([]);
+  const [isInTrash, setIsInTrash] = useState(false);
+  const [todayAnswersInTrash, setTodayAnswersInTrash] = useState([]);
+  const [alertTrash, setAlertTrash] = useState(false);
+
+  const getAnswersFromTrash = async () => {
+    try {
+      const res = await axios.get(
+        `${process.env.REACT_APP_SERVER_IP}/trashes/${member_num}`
+      );
+
+      setAnswersFromTrash(res.data);
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  };
+
+  const filter = () => {
+    const res = answersFromTrash.filter((v) => {
+      if (v.answer_year + v.answer_date === nowDate) {
+        return v;
+      }
+    });
+    if (res.length > 0) {
+      setTodayAnswersInTrash(res);
+      setIsInTrash(true);
+    }
+  };
+
+  useEffect(() => {
+    getAnswersFromTrash();
+  }, []);
+
+  useEffect(() => {
+    filter();
+  }, [answersFromTrash]);
+
   function TodayWrite() {
+    const location = useLocation();
+    const handleClick = () => {
+      location.onClicked = true;
+      if (location.onClicked && isInTrash) {
+        setAlertTrash(true);
+      } else {
+        history.push("/write");
+      }
+    };
     return (
       <div>
         <div className="TodayWrite">
@@ -38,9 +88,9 @@ export default function List_answer({
             <img src={girl} alt="ㅎㅇ"></img>
             <p>오늘의 질문입니다. 지금은 나의 생각을 남겨보세요!</p>
           </div>
-          <Link to="/write">
-            <p>답변작성하기</p>
-          </Link>
+          <a>
+            <p onClick={handleClick}>답변작성하기</p>
+          </a>
         </div>
       </div>
     );
@@ -75,7 +125,7 @@ export default function List_answer({
                   <>
                     <Link
                       to={{
-                        pathname: `/write/${data.question_num}`,
+                        pathname: `/write/${data.answer_num}`,
                         state: { data, question },
                       }}
                     >
@@ -99,10 +149,12 @@ export default function List_answer({
         })
       ) : // <TodayWrite />
       targetDate === nowDate ? (
-        <TodayWrite />
+        <TodayWrite todayAnswersInTrash={todayAnswersInTrash} />
       ) : (
         <div>당일만 작성 가능</div>
       )}
+
+      {alertTrash ? <AlertTrash isClose={setAlertTrash} /> : null}
     </div>
   );
 }

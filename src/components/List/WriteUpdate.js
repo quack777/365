@@ -1,12 +1,12 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation, useHistory, useParams } from "react-router-dom";
-import toggle_unselected from "../styles/images/main_private.png";
-import toggle_selected from "../styles/images/main_public.png";
+import toggle_unselected from "../../styles/images/main_private.png";
+import toggle_selected from "../../styles/images/main_public.png";
 import axios from "axios";
 
-import "../styles/Write.css";
-import { Alert } from "./alert";
+import "../../styles/Write.css";
+import { Alert } from "../util/alert_modal/alert";
 
 function WriteUpdate() {
   const { id } = useParams();
@@ -19,7 +19,9 @@ function WriteUpdate() {
     location?.state?.data?.answer
   );
 
-  const [question] = useState(location.state.question);
+  const answer_num = location.answer_num;
+
+  const [question] = useState(location?.state?.question);
   const [count, setCount] = useState(0);
   const [open, setOpen] = useState(false);
   const [publica, setPublica] = useState(location?.state?.data?.public_answer);
@@ -48,6 +50,20 @@ function WriteUpdate() {
         console.log(error);
       });
   }
+
+  // 2차. 수정 내용 가져오는 API
+  const getUpdate = async () => {
+    try {
+      const res = await axios.get(`/answers/pages/${answer_num}`);
+      console.log("res: ", res);
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  };
+  console.log(location);
+  useEffect(() => {
+    getUpdate();
+  }, []);
 
   function inputCount(e) {
     const inputValue = e.target.value;
@@ -115,10 +131,9 @@ function WriteUpdate() {
       </form>
       <div className="backColor"></div>
       <div id="WriteBack"></div>
-      { update ?
-        <Alert goAway={"/list"} content={"수정"}></Alert> 
-        : null
-      }
+      {update ? (
+        <Alert goAway={"/list"} isClose={setUpdate} content={"수정"}></Alert>
+      ) : null}
     </div>
   );
 }

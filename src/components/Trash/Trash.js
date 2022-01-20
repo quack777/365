@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import "../styles/Trash.css";
-import delete_normal from "../styles/images/delete_normal.png";
-import restore_normal from "../styles/images/restore_normal.png";
-import Line from "../styles/images/Line45.png";
+import "../../styles/Trash.css";
+import delete_normal from "../../styles/images/delete_normal.png";
+import restore_normal from "../../styles/images/restore_normal.png";
+import Line from "../../styles/images/Line45.png";
 import axios from "axios";
-import xxxxx from "../styles/images/xxxxx.png";
+import xxxxx from "../../styles/images/xxxxx.png";
 import Pagination from "./Pagination";
 import Posts from "./Posts";
 
@@ -200,7 +200,7 @@ function TrashAllDeleteModal(props) {
     axios({
       url: "/trashes/all",
       method: "delete",
-      baseURL: "http://13.125.34.8:8080/365Project/",
+      baseURL: `${process.env.REACT_APP_SERVER_IP}`,
       data: sendData,
     })
       .then((response) => {

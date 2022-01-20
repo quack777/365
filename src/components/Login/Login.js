@@ -1,13 +1,13 @@
 import React from "react";
 import { useEffect, useRef, useState } from "react";
-import loginImage from "../styles/images/loginImage.png";
-import login01 from "../styles/images/loginpage01.png";
-import login02 from "../styles/images/loginpage02.png";
-import rigthArrow from "../styles/images/Vector 1.png";
-import kaka from "../styles/images/kakao.png";
+import loginImage from "../../styles/images/loginImage.png";
+import login01 from "../../styles/images/loginpage01.png";
+import login02 from "../../styles/images/loginpage02.png";
+import rigthArrow from "../../styles/images/Vector 1.png";
+import kaka from "../../styles/images/kakao.png";
 import { Link, useHistory } from "react-router-dom";
 import queryString from "query-string";
-import "../styles/Login.css";
+import "../../styles/Login.css";
 import axios from "axios";
 
 // 배포환경
@@ -44,7 +44,6 @@ function Login() {
     setCurrent(current === 0 ? length - 1 : current - 1);
     setCurrent(0);
   }; */
-
   if (!Array.isArray(slideData) || slideData.length <= 0) {
     return null;
   }
@@ -66,8 +65,20 @@ function Login() {
           );
         })}
         <div className="practice">
-          <button className={current === 0 ? "choice" : null} id="firstChoice" onClick={() => setCurrent(0)}>1</button>
-          <button className={current === 1 ? "choice" : null} id="secondChoice" onClick={() => setCurrent(1)}>2</button>
+          <button
+            className={current === 0 ? "choice" : null}
+            id="firstChoice"
+            onClick={() => setCurrent(0)}
+          >
+            1
+          </button>
+          <button
+            className={current === 1 ? "choice" : null}
+            id="secondChoice"
+            onClick={() => setCurrent(1)}
+          >
+            2
+          </button>
         </div>
       </section>
       <section>
