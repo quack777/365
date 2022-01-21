@@ -58,6 +58,7 @@ function Write() {
       })
       .catch(function (error) {
         console.log(error);
+        history.push("/error")
       });
   }
 
@@ -91,6 +92,7 @@ function Write() {
       })
       .catch(function (error) {
         console.log(error);
+        history.push("/error")
       });
   }, [day]);
 
@@ -130,7 +132,7 @@ function Write() {
           <div className="twoBtn">
             <button
               style={{ borderStyle: "none", backgroundColor: "transparent" }}
-              onClick={() => history.goBack()}
+              onClick={() => history.push("/list")}
             >
               <p id="first">작성취소</p>
             </button>
